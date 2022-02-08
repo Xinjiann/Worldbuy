@@ -6,6 +6,12 @@ spring:
       url: jdbc:mysql://35.197.253.168:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: DTMKlxj199866
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 35.197.253.168:8848
+  application:
+    name: mall-coupon
 
 #    username: root
 #    data-password: DTMKlxj199866
@@ -19,3 +25,5 @@ mybatis-plus:
       id-type: auto
 server:
   port: 7000
+
+
