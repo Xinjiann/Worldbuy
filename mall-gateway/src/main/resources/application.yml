@@ -8,6 +8,13 @@ spring:
             - Path=/api/product/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
+        #  OSS签名的转发
+        - id: third_party_route
+          uri: lb://mall-third-party
+          predicates:
+            - Path=/api/third/party/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
 
         - id: admin_route
           uri: lb://renren-fast

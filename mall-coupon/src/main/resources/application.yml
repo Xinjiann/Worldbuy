@@ -10,6 +10,7 @@ spring:
     nacos:
       discovery:
         server-addr: 35.197.253.168:8848
+
   application:
     name: mall-coupon
 
