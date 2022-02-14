@@ -21,6 +21,7 @@
 
 <script>
 
+import PubSub from 'pubsub-js'
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {},
@@ -48,12 +49,11 @@ export default {
   watch:{
     catelogPath(v){
       this.paths = this.catelogPath;
-      console.log(this.paths)
     },
     paths(v){
       this.$emit("update:catelogPath",v);
-      // //还可以使用pubsub-js进行传值
-      // this.PubSub.publish("catPath",v);
+      //还可以使用pubsub-js进行传值
+      PubSub.publish("catPath",v);
     }
   },
   //方法集合
