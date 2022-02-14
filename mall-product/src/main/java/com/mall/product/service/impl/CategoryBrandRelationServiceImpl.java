@@ -1,5 +1,6 @@
 package com.mall.product.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.mall.product.dao.BrandDao;
 import com.mall.product.dao.CategoryDao;
 import com.mall.product.entity.BrandEntity;
@@ -39,13 +40,46 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<CategoryBrandRelationEntity> page = this.page(
-                new Query<CategoryBrandRelationEntity>().getPage(params),
-                new QueryWrapper<CategoryBrandRelationEntity>()
+            new Query<CategoryBrandRelationEntity>().getPage(params),
+            new QueryWrapper<CategoryBrandRelationEntity>()
         );
 
         return new PageUtils(page);
     }
 
+    /**
+     * 根据获取品牌id 、三级分类id查询对应的名字保存到数据库
+     */
+    @Override
+    public void saveDetail(CategoryBrandRelationEntity categoryBrandRelation) {
+        // 获取品牌id 、三级分类id
+        Long brandId = categoryBrandRelation.getBrandId();
+        Long catelogId = categoryBrandRelation.getCatelogId();
+        // 根据id查询详细名字
+        BrandEntity brandEntity = brandDao.selectById(brandId);
+        CategoryEntity categoryEntity = categoryDao.selectById(catelogId);
+        categoryBrandRelation.setBrandName(brandEntity.getName());
+        categoryBrandRelation.setCatelogName(categoryEntity.getName());
+        this.save(categoryBrandRelation);
+    }
+
+    @Override
+    public void updateBrand(Long brandId, String name) {
+        CategoryBrandRelationEntity entity = new CategoryBrandRelationEntity();
+        entity.setBrandId(brandId);
+        entity.setBrandName(name);
+        // 将所有品牌id为 brandId 的进行更新
+        this.update(entity, new UpdateWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
+    }
+
+    @Override
+    public void updateCategory(Long catId, String name) {
+        this.baseMapper.updateCategory(catId, name);
+    }
+
+    /**
+     * 获取某个分类下所有品牌信息
+     */
     @Override
     public List<BrandEntity> getBrandsByCatId(Long catId) {
         List<CategoryBrandRelationEntity> catelogId = categoryBrandRelationDao.selectList(new QueryWrapper<CategoryBrandRelationEntity>().eq("catelog_id", catId));
@@ -59,16 +93,4 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         return collect;
     }
 
-    @Override
-    public void saveDetail(CategoryBrandRelationEntity categoryBrandRelation) {
-        // 获取品牌id 、三级分类id
-        Long brandId = categoryBrandRelation.getBrandId();
-        Long catelogId = categoryBrandRelation.getCatelogId();
-        // 根据id查询详细名字
-        BrandEntity brandEntity = brandDao.selectById(brandId);
-        CategoryEntity categoryEntity = categoryDao.selectById(catelogId);
-        categoryBrandRelation.setBrandName(brandEntity.getName());
-        categoryBrandRelation.setCatelogName(categoryEntity.getName());
-        this.save(categoryBrandRelation);
-    }
 }
