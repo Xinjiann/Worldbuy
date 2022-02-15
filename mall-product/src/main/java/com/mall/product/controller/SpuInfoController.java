@@ -1,5 +1,6 @@
 package com.mall.product.controller;
 
+import com.mall.product.vo.SpuSaveVo;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -55,9 +56,8 @@ public class SpuInfoController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody SpuInfoEntity spuInfo){
-		spuInfoService.save(spuInfo);
-
+    public R save(@RequestBody SpuSaveVo vo){
+        spuInfoService.saveSpuInfo(vo);
         return R.ok();
     }
 
