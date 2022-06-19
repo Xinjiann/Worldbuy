@@ -29,7 +29,7 @@ spring:
             - Path=/api/ware/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
-        #  OSS签名的转发
+
         - id: third_party_route
           uri: lb://mall-third-party
           predicates:

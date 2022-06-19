@@ -5,9 +5,9 @@
         <el-input v-model="dataForm.paramKey" placeholder="参数名" clearable></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="getDataList()">查询</el-button>
-        <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button @click="getDataList()">search</el-button>
+        <el-button type="primary" @click="addOrUpdateHandle()">add</el-button>
+        <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">batch ddelete</el-button>
       </el-form-item>
     </el-form>
     <el-table

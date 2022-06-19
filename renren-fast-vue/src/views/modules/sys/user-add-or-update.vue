@@ -1,39 +1,39 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="!dataForm.id ? 'add' : 'edit'"
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-      <el-form-item label="用户名" prop="userName">
+      <el-form-item label="username" prop="userName">
         <el-input v-model="dataForm.userName" placeholder="登录帐号"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password" :class="{ 'is-required': !dataForm.id }">
+      <el-form-item label="password" prop="password" :class="{ 'is-required': !dataForm.id }">
         <el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
       </el-form-item>
-      <el-form-item label="确认密码" prop="comfirmPassword" :class="{ 'is-required': !dataForm.id }">
+      <el-form-item label="confirm password" prop="comfirmPassword" :class="{ 'is-required': !dataForm.id }">
         <el-input v-model="dataForm.comfirmPassword" type="password" placeholder="确认密码"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱" prop="email">
+      <el-form-item label="email" prop="email">
         <el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
       </el-form-item>
-      <el-form-item label="手机号" prop="mobile">
+      <el-form-item label="phone" prop="mobile">
         <el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
       </el-form-item>
-      <el-form-item label="角色" size="mini" prop="roleIdList">
+      <el-form-item label="role" size="mini" prop="roleIdList">
         <el-checkbox-group v-model="dataForm.roleIdList">
           <el-checkbox v-for="role in roleList" :key="role.roleId" :label="role.roleId">{{ role.roleName }}</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item label="状态" size="mini" prop="status">
+      <el-form-item label="status" size="mini" prop="status">
         <el-radio-group v-model="dataForm.status">
-          <el-radio :label="0">禁用</el-radio>
-          <el-radio :label="1">正常</el-radio>
+          <el-radio :label="0">ban</el-radio>
+          <el-radio :label="1">normal</el-radio>
         </el-radio-group>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="visible = false">cancel</el-button>
+      <el-button type="primary" @click="dataFormSubmit()">submit</el-button>
     </span>
   </el-dialog>
 </template>
@@ -44,30 +44,30 @@
     data () {
       var validatePassword = (rule, value, callback) => {
         if (!this.dataForm.id && !/\S/.test(value)) {
-          callback(new Error('密码不能为空'))
+          callback(new Error('password can not be empty'))
         } else {
           callback()
         }
       }
       var validateComfirmPassword = (rule, value, callback) => {
         if (!this.dataForm.id && !/\S/.test(value)) {
-          callback(new Error('确认密码不能为空'))
+          callback(new Error('password can not be empty'))
         } else if (this.dataForm.password !== value) {
-          callback(new Error('确认密码与密码输入不一致'))
+          callback(new Error('different password'))
         } else {
           callback()
         }
       }
       var validateEmail = (rule, value, callback) => {
         if (!isEmail(value)) {
-          callback(new Error('邮箱格式错误'))
+          callback(new Error('wrong email format'))
         } else {
           callback()
         }
       }
       var validateMobile = (rule, value, callback) => {
         if (!isMobile(value)) {
-          callback(new Error('手机号格式错误'))
+          callback(new Error('wrong phone number format'))
         } else {
           callback()
         }

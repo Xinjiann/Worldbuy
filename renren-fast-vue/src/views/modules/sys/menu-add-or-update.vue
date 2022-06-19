@@ -1,18 +1,18 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="!dataForm.id ? 'add' : 'edit'"
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-      <el-form-item label="类型" prop="type">
+      <el-form-item label="type" prop="type">
         <el-radio-group v-model="dataForm.type">
           <el-radio v-for="(type, index) in dataForm.typeList" :label="index" :key="index">{{ type }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item :label="dataForm.typeList[dataForm.type] + '名称'" prop="name">
-        <el-input v-model="dataForm.name" :placeholder="dataForm.typeList[dataForm.type] + '名称'"></el-input>
+      <el-form-item :label="'name'" prop="name">
+        <el-input v-model="dataForm.name" :placeholder="dataForm.typeList[dataForm.type] + ' name'"></el-input>
       </el-form-item>
-      <el-form-item label="上级菜单" prop="parentName">
+      <el-form-item label="parent" prop="parentName">
         <el-popover
           ref="menuListPopover"
           placement="bottom-start"
@@ -28,18 +28,18 @@
             :expand-on-click-node="false">
           </el-tree>
         </el-popover>
-        <el-input v-model="dataForm.parentName" v-popover:menuListPopover :readonly="true" placeholder="点击选择上级菜单" class="menu-list__input"></el-input>
+        <el-input v-model="dataForm.parentName" v-popover:menuListPopover :readonly="true" placeholder="click to select parent menu" class="menu-list__input"></el-input>
       </el-form-item>
-      <el-form-item v-if="dataForm.type === 1" label="菜单路由" prop="url">
-        <el-input v-model="dataForm.url" placeholder="菜单路由"></el-input>
+      <el-form-item v-if="dataForm.type === 1" label="menu url" prop="url">
+        <el-input v-model="dataForm.url" placeholder="menu url"></el-input>
       </el-form-item>
-      <el-form-item v-if="dataForm.type !== 0" label="授权标识" prop="perms">
-        <el-input v-model="dataForm.perms" placeholder="多个用逗号分隔, 如: user:list,user:create"></el-input>
+      <el-form-item v-if="dataForm.type !== 0" label="status" prop="perms">
+        <el-input v-model="dataForm.perms" placeholder="multiple separated by commas, like: user:list,user:create"></el-input>
       </el-form-item>
-      <el-form-item v-if="dataForm.type !== 2" label="排序号" prop="orderNum">
-        <el-input-number v-model="dataForm.orderNum" controls-position="right" :min="0" label="排序号"></el-input-number>
+      <el-form-item v-if="dataForm.type !== 2" label="index" prop="orderNum">
+        <el-input-number v-model="dataForm.orderNum" controls-position="right" :min="0" label="index number"></el-input-number>
       </el-form-item>
-      <el-form-item v-if="dataForm.type !== 2" label="菜单图标" prop="icon">
+      <el-form-item v-if="dataForm.type !== 2" label="menu icon" prop="icon">
         <el-row>
           <el-col :span="22">
             <el-popover
@@ -59,7 +59,7 @@
                 </div>
               </div>
             </el-popover>
-            <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="true" placeholder="菜单图标名称" class="icon-list__input"></el-input>
+            <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="true" placeholder="menu icon name" class="icon-list__input"></el-input>
           </el-col>
           <el-col :span="2" class="icon-list__tips">
             <el-tooltip placement="top" effect="light">
@@ -71,8 +71,8 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="visible = false">cancel</el-button>
+      <el-button type="primary" @click="dataFormSubmit()">submit</el-button>
     </span>
   </el-dialog>
 </template>
@@ -94,7 +94,7 @@
         dataForm: {
           id: 0,
           type: 1,
-          typeList: ['目录', '菜单', '按钮'],
+          typeList: ['category', 'menu', 'button'],
           name: '',
           parentId: 0,
           parentName: '',
