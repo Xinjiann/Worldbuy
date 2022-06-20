@@ -23,12 +23,11 @@ public class MallExceptionControllerAdvice {
 
 	@ExceptionHandler(value = {WebExchangeBindException.class})
 	public R handleVaildException(WebExchangeBindException e) {
-		log.error("数据校验出现问题{}，异常类型：{}", e.getMessage(), e.getClass());
+		log.error("data format exception{}，exception type：{}", e.getMessage(), e.getClass());
 		BindingResult bindingResult = e.getBindingResult();
 
 		Map<String, String> errorMap = new HashMap<>();
 		bindingResult.getFieldErrors().forEach((fieldError) -> {
-			// 错误字段 、 错误提示
 			errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
 		});
 		return R.error(BizCodeEnum.VAILD_EXCEPTION.getCode(), BizCodeEnum.VAILD_EXCEPTION.getMsg()).put("data", errorMap);
@@ -37,7 +36,7 @@ public class MallExceptionControllerAdvice {
 	@ExceptionHandler(value = Throwable.class)
 	public R handleException(Throwable throwable) {
 
-		log.error("错误：", throwable);
+		log.error("exception：", throwable);
 		return R.error(BizCodeEnum.UNKNOW_EXCEPTION.getCode(), BizCodeEnum.UNKNOW_EXCEPTION.getMsg());
 	}
 }
