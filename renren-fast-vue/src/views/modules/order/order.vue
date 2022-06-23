@@ -38,13 +38,13 @@
         prop="orderSn"
         header-align="center"
         align="center"
-        label="订单号">
+        label="order number">
       </el-table-column>
       <el-table-column
         prop="couponId"
         header-align="center"
         align="center"
-        label="使用的优惠券">
+        label="used coupon">
       </el-table-column>
       <el-table-column
         prop="createTime"
@@ -56,43 +56,43 @@
         prop="memberUsername"
         header-align="center"
         align="center"
-        label="用户名">
+        label="username">
       </el-table-column>
       <el-table-column
         prop="totalAmount"
         header-align="center"
         align="center"
-        label="订单总额">
+        label="total">
       </el-table-column>
       <el-table-column
         prop="payAmount"
         header-align="center"
         align="center"
-        label="应付总额">
+        label="price to pay">
       </el-table-column>
       <el-table-column
         prop="freightAmount"
         header-align="center"
         align="center"
-        label="运费金额">
+        label="ship cost">
       </el-table-column>
       <el-table-column
         prop="promotionAmount"
         header-align="center"
         align="center"
-        label="促销优化金额（促销价、满减、阶梯价）">
+        label="discount">
       </el-table-column>
       <el-table-column
         prop="integrationAmount"
         header-align="center"
         align="center"
-        label="积分抵扣金额">
+        label="credit discount">
       </el-table-column>
       <el-table-column
         prop="couponAmount"
         header-align="center"
         align="center"
-        label="优惠券抵扣金额">
+        label="coupon discount">
       </el-table-column>
       <el-table-column
         prop="discountAmount"

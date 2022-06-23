@@ -6,18 +6,18 @@
   <groupId>com.mall</groupId>
   <artifactId>mall</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>mall</name>
-  <description>聚合</description>
+  <name>Worldbuy</name>
+  <description>aggregation</description>
   <packaging>pom</packaging>
 
   <modules>
-    <module>mall-member</module>
-    <module>mall-order</module>
-    <module>mall-product</module>
-    <module>mall-ware</module>
-    <module>mall-coupon</module>
+    <module>worldbuy-member</module>
+    <module>worldbuy-order</module>
+    <module>worldbuy-product</module>
+    <module>worldbuy-ware</module>
+    <module>worldbuy-coupon</module>
     <module>renren-fast</module>
-    <module>mall-common</module>
+    <module>worldbuy-common</module>
     <module>renren-generator</module>
   </modules>
 

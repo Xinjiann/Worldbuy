@@ -5,19 +5,19 @@
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
       <el-form-item label="username" prop="userName">
-        <el-input v-model="dataForm.userName" placeholder="登录帐号"></el-input>
+        <el-input v-model="dataForm.userName" placeholder="username"></el-input>
       </el-form-item>
       <el-form-item label="password" prop="password" :class="{ 'is-required': !dataForm.id }">
-        <el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
+        <el-input v-model="dataForm.password" type="password" placeholder="password"></el-input>
       </el-form-item>
       <el-form-item label="confirm password" prop="comfirmPassword" :class="{ 'is-required': !dataForm.id }">
-        <el-input v-model="dataForm.comfirmPassword" type="password" placeholder="确认密码"></el-input>
+        <el-input v-model="dataForm.comfirmPassword" type="password" placeholder="confirm password"></el-input>
       </el-form-item>
       <el-form-item label="email" prop="email">
-        <el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
+        <el-input v-model="dataForm.email" placeholder="email"></el-input>
       </el-form-item>
       <el-form-item label="phone" prop="mobile">
-        <el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
+        <el-input v-model="dataForm.mobile" placeholder="phone"></el-input>
       </el-form-item>
       <el-form-item label="role" size="mini" prop="roleIdList">
         <el-checkbox-group v-model="dataForm.roleIdList">

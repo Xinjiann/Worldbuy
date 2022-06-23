@@ -39,7 +39,7 @@
         },
         dataRule: {
           beanName: [
-            { required: true, message: '用户名不能为空', trigger: 'blur' }
+            { required: true, message: 'username empty', trigger: 'blur' }
           ],
           cronExpression: [
             { required: true, message: 'cron表达式不能为空', trigger: 'blur' }

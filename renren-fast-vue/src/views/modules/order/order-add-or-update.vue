@@ -1,136 +1,136 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="!dataForm.id ? 'Add' : 'Modify'"
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
     <el-form-item label="member_id" prop="memberId">
       <el-input v-model="dataForm.memberId" placeholder="member_id"></el-input>
     </el-form-item>
-    <el-form-item label="订单号" prop="orderSn">
-      <el-input v-model="dataForm.orderSn" placeholder="订单号"></el-input>
+    <el-form-item label="order number" prop="orderSn">
+      <el-input v-model="dataForm.orderSn" placeholder="order number"></el-input>
     </el-form-item>
-    <el-form-item label="使用的优惠券" prop="couponId">
-      <el-input v-model="dataForm.couponId" placeholder="使用的优惠券"></el-input>
+    <el-form-item label="Coupon used" prop="couponId">
+      <el-input v-model="dataForm.couponId" placeholder="Coupon used"></el-input>
     </el-form-item>
     <el-form-item label="create_time" prop="createTime">
       <el-input v-model="dataForm.createTime" placeholder="create_time"></el-input>
     </el-form-item>
-    <el-form-item label="用户名" prop="memberUsername">
-      <el-input v-model="dataForm.memberUsername" placeholder="用户名"></el-input>
+    <el-form-item label="username" prop="memberUsername">
+      <el-input v-model="dataForm.memberUsername" placeholder="username"></el-input>
     </el-form-item>
-    <el-form-item label="订单总额" prop="totalAmount">
-      <el-input v-model="dataForm.totalAmount" placeholder="订单总额"></el-input>
+    <el-form-item label="Order total" prop="totalAmount">
+      <el-input v-model="dataForm.totalAmount" placeholder="Order total"></el-input>
     </el-form-item>
-    <el-form-item label="应付总额" prop="payAmount">
-      <el-input v-model="dataForm.payAmount" placeholder="应付总额"></el-input>
+    <el-form-item label="Amount payable" prop="payAmount">
+      <el-input v-model="dataForm.payAmount" placeholder="Total amount payable"></el-input>
     </el-form-item>
-    <el-form-item label="运费金额" prop="freightAmount">
-      <el-input v-model="dataForm.freightAmount" placeholder="运费金额"></el-input>
+    <el-form-item label="Freight Amount" prop="freightAmount">
+      <el-input v-model="dataForm.freightAmount" placeholder="Freight Amount"></el-input>
     </el-form-item>
-    <el-form-item label="促销优化金额（促销价、满减、阶梯价）" prop="promotionAmount">
-      <el-input v-model="dataForm.promotionAmount" placeholder="促销优化金额（促销价、满减、阶梯价）"></el-input>
+    <el-form-item label="Promotion optimization amount (promotion price, full discount, step price)" prop="promotionAmount">
+      <el-input v-model="dataForm.promotionAmount" placeholder="Promotion optimization amount (promotion price, full discount, step price)"></el-input>
     </el-form-item>
-    <el-form-item label="积分抵扣金额" prop="integrationAmount">
-      <el-input v-model="dataForm.integrationAmount" placeholder="积分抵扣金额"></el-input>
+    <el-form-item label="Point deduction amount" prop="integrationAmount">
+      <el-input v-model="dataForm.integrationAmount" placeholder="Points deduction amount"></el-input>
     </el-form-item>
-    <el-form-item label="优惠券抵扣金额" prop="couponAmount">
-      <el-input v-model="dataForm.couponAmount" placeholder="优惠券抵扣金额"></el-input>
+    <el-form-item label="Coupon Amount" prop="couponAmount">
+      <el-input v-model="dataForm.couponAmount" placeholder="Coupon deduction amount"></el-input>
     </el-form-item>
-    <el-form-item label="后台调整订单使用的折扣金额" prop="discountAmount">
-      <el-input v-model="dataForm.discountAmount" placeholder="后台调整订单使用的折扣金额"></el-input>
+    <el-form-item label="The discount amount used to adjust the order in the background" prop="discountAmount">
+      <el-input v-model="dataForm.discountAmount" placeholder="Background adjustment of the discount amount used by the order"></el-input>
     </el-form-item>
-    <el-form-item label="支付方式【1->支付宝；2->微信；3->银联； 4->货到付款；】" prop="payType">
-      <el-input v-model="dataForm.payType" placeholder="支付方式【1->支付宝；2->微信；3->银联； 4->货到付款；】"></el-input>
+    <el-form-item label="Payment method [1->Alipay; 2->WeChat; 3->UnionPay; 4->Cash on Delivery;]" prop="payType">
+      <el-input v-model="dataForm.payType" placeholder="Payment method [1->Alipay; 2->WeChat; 3->UnionPay; 4->Cash on Delivery;]"></el-input>
     </el-form-item>
-    <el-form-item label="订单来源[0->PC订单；1->app订单]" prop="sourceType">
-      <el-input v-model="dataForm.sourceType" placeholder="订单来源[0->PC订单；1->app订单]"></el-input>
+    <el-form-item label="Order Source [0->PC Order; 1->App Order]" prop="sourceType">
+      <el-input v-model="dataForm.sourceType" placeholder="Order source [0->PC order; 1->app order]"></el-input>
     </el-form-item>
-    <el-form-item label="订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】" prop="status">
-      <el-input v-model="dataForm.status" placeholder="订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】"></el-input>
+    <el-form-item label="Order status [0->Pending payment; 1->Pending delivery; 2->Shipped; 3->Completed; 4->Closed; 5->Invalid order] " prop="status">
+      <el-input v-model="dataForm.status" placeholder="Order status [0->pending payment; 1->pending delivery; 2->delivered; 3->completed; 4->closed ;5->Invalid order]"></el-input>
     </el-form-item>
-    <el-form-item label="物流公司(配送方式)" prop="deliveryCompany">
-      <el-input v-model="dataForm.deliveryCompany" placeholder="物流公司(配送方式)"></el-input>
+    <el-form-item label="Logistics company (delivery method)" prop="deliveryCompany">
+      <el-input v-model="dataForm.deliveryCompany" placeholder="Logistics company (delivery method)"></el-input>
     </el-form-item>
-    <el-form-item label="物流单号" prop="deliverySn">
-      <el-input v-model="dataForm.deliverySn" placeholder="物流单号"></el-input>
+    <el-form-item label="Logistics number" prop="deliverySn">
+      <el-input v-model="dataForm.deliverySn" placeholder="delivery order number"></el-input>
     </el-form-item>
-    <el-form-item label="自动确认时间（天）" prop="autoConfirmDay">
-      <el-input v-model="dataForm.autoConfirmDay" placeholder="自动确认时间（天）"></el-input>
+    <el-form-item label="Auto Confirmation Time (Days)" prop="autoConfirmDay">
+      <el-input v-model="dataForm.autoConfirmDay" placeholder="Auto confirmation time (days)"></el-input>
     </el-form-item>
-    <el-form-item label="可以获得的积分" prop="integration">
-      <el-input v-model="dataForm.integration" placeholder="可以获得的积分"></el-input>
+    <el-form-item label="Points earned" prop="integration">
+      <el-input v-model="dataForm.integration" placeholder="Points earned"></el-input>
     </el-form-item>
-    <el-form-item label="可以获得的成长值" prop="growth">
-      <el-input v-model="dataForm.growth" placeholder="可以获得的成长值"></el-input>
+    <el-form-item label="Achievable growth value" prop="growth">
+      <el-input v-model="dataForm.growth" placeholder="Available growth value"></el-input>
     </el-form-item>
-    <el-form-item label="发票类型[0->不开发票；1->电子发票；2->纸质发票]" prop="billType">
-      <el-input v-model="dataForm.billType" placeholder="发票类型[0->不开发票；1->电子发票；2->纸质发票]"></el-input>
+    <el-form-item label="Invoice Type [0->No Invoice; 1->Electronic Invoice; 2->Paper Invoice]" prop="billType">
+      <el-input v-model="dataForm.billType" placeholder="Invoice Type [0->No Invoice; 1->Electronic Invoice; 2->Paper Invoice]"></el-input>
     </el-form-item>
-    <el-form-item label="发票抬头" prop="billHeader">
-      <el-input v-model="dataForm.billHeader" placeholder="发票抬头"></el-input>
+    <el-form-item label="Invoice Header" prop="billHeader">
+      <el-input v-model="dataForm.billHeader" placeholder="Invoice Header"></el-input>
     </el-form-item>
-    <el-form-item label="发票内容" prop="billContent">
-      <el-input v-model="dataForm.billContent" placeholder="发票内容"></el-input>
+    <el-form-item label="Invoice Content" prop="billContent">
+      <el-input v-model="dataForm.billContent" placeholder="Invoice Content"></el-input>
     </el-form-item>
-    <el-form-item label="收票人电话" prop="billReceiverPhone">
-      <el-input v-model="dataForm.billReceiverPhone" placeholder="收票人电话"></el-input>
+    <el-form-item label="BillReceiverPhone" prop="billReceiverPhone">
+      <el-input v-model="dataForm.billReceiverPhone" placeholder="BillReceiver Phone"></el-input>
     </el-form-item>
-    <el-form-item label="收票人邮箱" prop="billReceiverEmail">
-      <el-input v-model="dataForm.billReceiverEmail" placeholder="收票人邮箱"></el-input>
+    <el-form-item label="BillReceiverEmail" prop="billReceiverEmail">
+      <el-input v-model="dataForm.billReceiverEmail" placeholder="Billee Mailbox"></el-input>
     </el-form-item>
-    <el-form-item label="收货人姓名" prop="receiverName">
-      <el-input v-model="dataForm.receiverName" placeholder="收货人姓名"></el-input>
+    <el-form-item label="Receiver Name" prop="receiverName">
+      <el-input v-model="dataForm.receiverName" placeholder="receiver name"></el-input>
     </el-form-item>
-    <el-form-item label="收货人电话" prop="receiverPhone">
-      <el-input v-model="dataForm.receiverPhone" placeholder="收货人电话"></el-input>
+    <el-form-item label="Receiver Phone" prop="receiverPhone">
+      <el-input v-model="dataForm.receiverPhone" placeholder="Receiver Phone"></el-input>
     </el-form-item>
-    <el-form-item label="收货人邮编" prop="receiverPostCode">
-      <el-input v-model="dataForm.receiverPostCode" placeholder="收货人邮编"></el-input>
+    <el-form-item label="Receiver Postcode" prop="receiverPostCode">
+      <el-input v-model="dataForm.receiverPostCode" placeholder="Receiver Postcode"></el-input>
     </el-form-item>
-    <el-form-item label="省份/直辖市" prop="receiverProvince">
-      <el-input v-model="dataForm.receiverProvince" placeholder="省份/直辖市"></el-input>
+    <el-form-item label="Province/Municipality" prop="receiverProvince">
+      <el-input v-model="dataForm.receiverProvince" placeholder="province/municipality"></el-input>
     </el-form-item>
-    <el-form-item label="城市" prop="receiverCity">
-      <el-input v-model="dataForm.receiverCity" placeholder="城市"></el-input>
+    <el-form-item label="City" prop="receiverCity">
+      <el-input v-model="dataForm.receiverCity" placeholder="city"></el-input>
     </el-form-item>
-    <el-form-item label="区" prop="receiverRegion">
-      <el-input v-model="dataForm.receiverRegion" placeholder="区"></el-input>
+    <el-form-item label="Region" prop="receiverRegion">
+      <el-input v-model="dataForm.receiverRegion" placeholder="Region"></el-input>
     </el-form-item>
-    <el-form-item label="详细地址" prop="receiverDetailAddress">
-      <el-input v-model="dataForm.receiverDetailAddress" placeholder="详细地址"></el-input>
+    <el-form-item label="Detailed address" prop="receiverDetailAddress">
+      <el-input v-model="dataForm.receiverDetailAddress" placeholder="Detailed address"></el-input>
     </el-form-item>
-    <el-form-item label="订单备注" prop="note">
-      <el-input v-model="dataForm.note" placeholder="订单备注"></el-input>
+    <el-form-item label="Order note" prop="note">
+      <el-input v-model="dataForm.note" placeholder="Order Note"></el-input>
     </el-form-item>
-    <el-form-item label="确认收货状态[0->未确认；1->已确认]" prop="confirmStatus">
-      <el-input v-model="dataForm.confirmStatus" placeholder="确认收货状态[0->未确认；1->已确认]"></el-input>
+    <el-form-item label="Confirm receipt status [0->unconfirmed; 1->confirmed]" prop="confirmStatus">
+      <el-input v-model="dataForm.confirmStatus" placeholder="Confirm receipt status [0->unconfirmed; 1->confirmed]"></el-input>
     </el-form-item>
-    <el-form-item label="删除状态【0->未删除；1->已删除】" prop="deleteStatus">
-      <el-input v-model="dataForm.deleteStatus" placeholder="删除状态【0->未删除；1->已删除】"></el-input>
+    <el-form-item label="Delete Status [0->Not deleted; 1->Deleted]" prop="deleteStatus">
+      <el-input v-model="dataForm.deleteStatus" placeholder="Delete status [0->Not deleted; 1->Deleted]"></el-input>
     </el-form-item>
-    <el-form-item label="下单时使用的积分" prop="useIntegration">
-      <el-input v-model="dataForm.useIntegration" placeholder="下单时使用的积分"></el-input>
+    <el-form-item label="Points to use when placing an order" prop="useIntegration">
+      <el-input v-model="dataForm.useIntegration" placeholder="Points used when placing an order"></el-input>
     </el-form-item>
-    <el-form-item label="支付时间" prop="paymentTime">
-      <el-input v-model="dataForm.paymentTime" placeholder="支付时间"></el-input>
+    <el-form-item label="Payment Time" prop="paymentTime">
+      <el-input v-model="dataForm.paymentTime" placeholder="Payment Time"></el-input>
     </el-form-item>
-    <el-form-item label="发货时间" prop="deliveryTime">
-      <el-input v-model="dataForm.deliveryTime" placeholder="发货时间"></el-input>
+    <el-form-item label="Delivery Time" prop="deliveryTime">
+      <el-input v-model="dataForm.deliveryTime" placeholder="delivery time"></el-input>
     </el-form-item>
-    <el-form-item label="确认收货时间" prop="receiveTime">
-      <el-input v-model="dataForm.receiveTime" placeholder="确认收货时间"></el-input>
+    <el-form-item label="Confirm receipt time" prop="receiveTime">
+      <el-input v-model="dataForm.receiveTime" placeholder="Confirm receipt time"></el-input>
     </el-form-item>
-    <el-form-item label="评价时间" prop="commentTime">
-      <el-input v-model="dataForm.commentTime" placeholder="评价时间"></el-input>
+    <el-form-item label="Comment Time" prop="commentTime">
+      <el-input v-model="dataForm.commentTime" placeholder="comment time"></el-input>
     </el-form-item>
-    <el-form-item label="修改时间" prop="modifyTime">
-      <el-input v-model="dataForm.modifyTime" placeholder="修改时间"></el-input>
+    <el-form-item label="modify time" prop="modifyTime">
+      <el-input v-model="dataForm.modifyTime" placeholder="modify time"></el-input>
     </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="visible = false">Cancel</el-button>
+      <el-button type="primary" @click="dataFormSubmit()">OK</el-button>
     </span>
   </el-dialog>
 </template>
