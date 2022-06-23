@@ -12,7 +12,7 @@ spring:
         server-addr: 34.105.136.131:8848
 
   application:
-    name: mall-coupon
+    name: worldbuy-coupon
 
 #    username: root
 #    data-password: DTMKlxj199866

@@ -3,35 +3,35 @@ spring:
     gateway:
       routes:
         - id: product_route
-          uri: lb://mall-product
+          uri: lb://worldbuy-product
           predicates:
             - Path=/api/product/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: coupon_route
-          uri: lb://mall-coupon
+          uri: lb://worldbuy-coupon
           predicates:
             - Path=/api/coupon/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: member_route
-          uri: lb://mall-member
+          uri: lb://worldbuy-member
           predicates:
             - Path=/api/member/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: ware_route
-          uri: lb://mall-ware
+          uri: lb://worldbuy-ware
           predicates:
             - Path=/api/ware/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: third_party_route
-          uri: lb://mall-third-party
+          uri: lb://worldbuy-third-party
           predicates:
             - Path=/api/third/party/**
           filters:

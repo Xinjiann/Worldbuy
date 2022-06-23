@@ -10,10 +10,10 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.mall</groupId>
-  <artifactId>mall-gateway</artifactId>
+  <artifactId>worldbuy-gateway</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>mall-gateway</name>
-  <description>mall-gateway</description>
+  <name>worldbuy-gateway</name>
+  <description>worldbuy-gateway</description>
   <properties>
     <java.version>1.8</java.version>
     <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
@@ -21,7 +21,7 @@
   <dependencies>
     <dependency>
       <groupId>com.mall</groupId>
-      <artifactId>mall-common</artifactId>
+      <artifactId>worldbuy-common</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>

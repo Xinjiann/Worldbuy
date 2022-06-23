@@ -11,7 +11,7 @@ spring:
       discovery:
         server-addr: 34.105.136.131:8848
     application:
-      name: mall-member
+      name: worldbuy-member
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml

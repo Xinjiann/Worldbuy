@@ -12,7 +12,7 @@ import java.util.List;
  * Description：
  * date：2020/6/8 20:26
  */
-@FeignClient("mall-ware")
+@FeignClient("worldbuy-ware")
 public interface WareFeignService {
 
 	/**

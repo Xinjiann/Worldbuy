@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@FeignClient("mall-order")
+@FeignClient("worldbuy-order")
 public interface OrderFeignService {
 
 	@PostMapping("/order/order/listWithItem")

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * Description：远程调用优惠券服务
  * date：2020/6/5 17:06
  */
-@FeignClient("mall-coupon")
+@FeignClient("worldbuy-coupon")
 public interface CouponFeignService {
 
 	/**

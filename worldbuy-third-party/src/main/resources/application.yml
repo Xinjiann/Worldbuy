@@ -11,7 +11,7 @@ spring:
         bucket: mall-lxj
 
   application:
-    name: mall-third-party
+    name: worldbuy-third-party
 
 server:
   port: 30000
