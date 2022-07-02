@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-switch v-model="draggable" inline-prompt active-text="enable drag" inactive-text="disable drag"></el-switch>
-    <el-button v-if="draggable" @click="batchSave">batch save</el-button>
+    <!-- <el-switch v-model="draggable" inline-prompt active-text="enable drag" inactive-text="disable drag"></el-switch> -->
+    <!-- <el-button v-if="draggable" @click="batchSave">batch save</el-button> -->
     <el-button type="danger" @click="batchDelete">batch delete</el-button>
     <br><br>
     <el-tree
