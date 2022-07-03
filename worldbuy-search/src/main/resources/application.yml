@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: worldbuy-search
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 34.105.136.131:8848
+
+ipAddr: 34.105.136.131
+server:
+  port: 12000
