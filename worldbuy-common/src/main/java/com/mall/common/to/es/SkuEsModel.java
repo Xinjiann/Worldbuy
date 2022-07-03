@@ -111,7 +111,7 @@ public class SkuEsModel implements Serializable {
 	private List<Attrs> attrs;
 
 	/**
-	 *  检索属性
+	 *  index attributes
 	 */
 	@Data
 	public static class Attrs implements Serializable{

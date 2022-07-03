@@ -5,11 +5,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mall.product.entity.SpuInfoEntity;
 import com.mall.product.service.SpuInfoService;
@@ -31,8 +27,19 @@ public class SpuInfoController {
     @Autowired
     private SpuInfoService spuInfoService;
 
+
     /**
-     * 列表
+     * goods on
+     */
+    @PostMapping("/{spuId}/up")
+    public R up(@PathVariable("spuId") Long spuId){
+        spuInfoService.up(spuId);
+        return R.ok();
+    }
+
+
+    /**
+     * list
      */
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
@@ -43,7 +50,7 @@ public class SpuInfoController {
 
 
     /**
-     * 信息
+     * info
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
@@ -53,7 +60,7 @@ public class SpuInfoController {
     }
 
     /**
-     * 保存
+     * save
      */
     @RequestMapping("/save")
     public R save(@RequestBody SpuSaveVo vo){
@@ -62,7 +69,7 @@ public class SpuInfoController {
     }
 
     /**
-     * 修改
+     * update
      */
     @RequestMapping("/update")
     public R update(@RequestBody SpuInfoEntity spuInfo){
@@ -72,7 +79,7 @@ public class SpuInfoController {
     }
 
     /**
-     * 删除
+     * delete
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){

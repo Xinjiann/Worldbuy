@@ -1,9 +1,10 @@
-package com.firenayl.mall.search.controller;
+package com.mall.worldbuysearch.controller;
 
-import com.firenay.common.exception.BizCodeEnum;
-import com.firenay.common.to.es.SkuEsModel;
-import com.firenay.common.utils.R;
-import com.firenayl.mall.search.service.ProductSaveService;
+
+import com.mall.common.exception.BizCodeEnum;
+import com.mall.common.to.es.SkuEsModel;
+import com.mall.common.utils.R;
+import com.mall.worldbuysearch.service.ProductSaveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +17,8 @@ import java.util.List;
 
 /**
  * <p>Title: ElasticSaveController</p>
- * Description：商品上架 Controller
- * date：2020/6/8 21:13
+ * Description：goods on Controller
+ * date：2022/7/3
  */
 @Slf4j
 @RequestMapping("/search/save")
@@ -28,7 +29,7 @@ public class ElasticSaveController {
 	private ProductSaveService productSaveService;
 
 	/**
-	 * 上架商品
+	 * goods on
 	 */
 	@PostMapping("/product")
 	public R productStatusUp(@RequestBody List<SkuEsModel> skuEsModels){
@@ -37,7 +38,7 @@ public class ElasticSaveController {
 		try {
 			status = productSaveService.productStatusUp(skuEsModels);
 		} catch (IOException e) {
-			log.error("ElasticSaveController商品上架错误: {}", e);
+			log.error("ElasticSaveController: {}", e);
 			return R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());
 		}
 		if(!status){

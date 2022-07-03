@@ -15,9 +15,6 @@ import java.util.List;
 @FeignClient("worldbuy-ware")
 public interface WareFeignService {
 
-	/**
-	 * 修改真个系统的 R 带上泛型
-	 */
 	@PostMapping("/ware/waresku/hasStock")
 //	List<SkuHasStockVo> getSkuHasStock(@RequestBody List<Long> SkuIds);
 	R getSkuHasStock(@RequestBody List<Long> SkuIds);

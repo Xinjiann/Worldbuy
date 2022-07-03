@@ -1,6 +1,6 @@
-package com.firenayl.mall.search.service;
+package com.mall.worldbuysearch.service;
 
-import com.firenay.common.to.es.SkuEsModel;
+import com.mall.common.to.es.SkuEsModel;
 
 import java.io.IOException;
 import java.util.List;

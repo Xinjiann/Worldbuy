@@ -1,14 +1,12 @@
 package com.mall.ware.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.mall.common.to.es.SkuHasStockVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mall.ware.entity.WareSkuEntity;
 import com.mall.ware.service.WareSkuService;
@@ -31,7 +29,17 @@ public class WareSkuController {
     private WareSkuService wareSkuService;
 
     /**
-     * 列表
+     * Check if sku is in stock
+     * Return the current id stock amount
+     */
+    @PostMapping("/hasStock")
+    public R getSkuHasStock(@RequestBody List<Long> SkuIds){
+        List<SkuHasStockVo> vos = wareSkuService.getSkuHasStock(SkuIds);
+        return R.ok().setData(vos);
+    }
+
+    /**
+     * list
      */
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
@@ -42,7 +50,7 @@ public class WareSkuController {
 
 
     /**
-     * 信息
+     * info
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
@@ -52,7 +60,7 @@ public class WareSkuController {
     }
 
     /**
-     * 保存
+     * save
      */
     @RequestMapping("/save")
     public R save(@RequestBody WareSkuEntity wareSku){
@@ -62,7 +70,7 @@ public class WareSkuController {
     }
 
     /**
-     * 修改
+     * update
      */
     @RequestMapping("/update")
     public R update(@RequestBody WareSkuEntity wareSku){
@@ -72,7 +80,7 @@ public class WareSkuController {
     }
 
     /**
-     * 删除
+     * delete
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
