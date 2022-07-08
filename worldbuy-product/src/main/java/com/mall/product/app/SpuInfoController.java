@@ -1,4 +1,4 @@
-package com.mall.product.controller;
+package com.mall.product.app;
 
 import com.mall.product.vo.SpuSaveVo;
 import java.util.Arrays;

@@ -4,6 +4,7 @@ import com.mall.product.entity.AttrEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 商品属性
@@ -15,5 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AttrDao extends BaseMapper<AttrEntity> {
 
-  List<Long> selectSearchAttrIds(List<Long> attrIds);
+  List<Long> selectSearchAttrIds(@Param("attrIds") List<Long> attrIds);
 }

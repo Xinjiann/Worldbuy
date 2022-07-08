@@ -17,7 +17,7 @@ import java.util.Map;
  * date：2020/6/1 21:19
  */
 @Slf4j
-@RestControllerAdvice(basePackages = "com.mall.product.controller")
+@RestControllerAdvice(basePackages = "com.mall.product.app")
 public class MallExceptionControllerAdvice {
 
 

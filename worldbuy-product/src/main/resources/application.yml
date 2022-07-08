@@ -1,4 +1,6 @@
 spring:
+  mvc:
+    static-path-pattern: /static/**
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -6,6 +8,10 @@ spring:
       url: jdbc:mysql://34.105.136.131:3306/worldbuy_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: DTMKlxj199866
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
   cloud:
     nacos:
       discovery:

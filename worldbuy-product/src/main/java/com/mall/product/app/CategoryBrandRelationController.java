@@ -1,4 +1,4 @@
-package com.mall.product.controller;
+package com.mall.product.app;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mall.product.entity.BrandEntity;

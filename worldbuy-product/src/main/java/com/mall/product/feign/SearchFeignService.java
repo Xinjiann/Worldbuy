@@ -14,7 +14,7 @@ import java.util.List;
  * Description：feign goods on
  * date：2022/7/3
  */
-@FeignClient("mall-search")
+@FeignClient("worldbuy-search")
 public interface SearchFeignService {
 
 	@PostMapping("/search/save/product")

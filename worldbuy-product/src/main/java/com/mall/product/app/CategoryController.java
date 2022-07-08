@@ -1,9 +1,8 @@
-package com.mall.product.controller;
+package com.mall.product.app;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -11,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mall.product.entity.CategoryEntity;
 import com.mall.product.service.CategoryService;
-import com.mall.common.utils.PageUtils;
 import com.mall.common.utils.R;
 
 
