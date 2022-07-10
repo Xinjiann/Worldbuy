@@ -23,10 +23,10 @@ public interface CategoryService extends IService<CategoryEntity> {
 
   void removeMenuByIds(List<Long> asList);
 
-  /**
-   * 找到catalogId 完整路径
-   */
   Long[] findCateLogPath(Long catelogId);
 
+  List<CategoryEntity> getLevel1Categorys();
+
+  Map<String, List<Catelog2Vo>> getCatelogJson();
 }
 

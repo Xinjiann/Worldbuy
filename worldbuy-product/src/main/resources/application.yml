@@ -1,6 +1,4 @@
 spring:
-  mvc:
-    static-path-pattern: /static/**
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:

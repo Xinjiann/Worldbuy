@@ -54,15 +54,44 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     public Long[] findCateLogPath(Long catelogId) {
         List<Long> paths = new ArrayList<>();
         paths = findParentPath(catelogId, paths);
-        // 收集的时候是顺序 前端是逆序显示的 所以用集合工具类给它逆序一下
         Collections.reverse(paths);
         return paths.toArray(new Long[paths.size()]);
     }
 
+    @Override
+    public List<CategoryEntity> getLevel1Categorys() {
+        return baseMapper.selectList(new QueryWrapper<CategoryEntity>().eq("cat_level", 1));
+    }
 
-    /**
-     * 第一次查询的所有 CategoryEntity 然后根据 parent_cid去这里找
-     */
+    @Override
+    public Map<String, List<Catelog2Vo>> getCatelogJson() {
+        List<CategoryEntity> entityList = baseMapper.selectList(null);
+        // search all level 1 cate
+        List<CategoryEntity> level1 = getCategoryEntities(entityList, 0L);
+        Map<String, List<Catelog2Vo>> parent_cid = level1.stream().collect(Collectors.toMap(k -> k.getCatId().toString(), v -> {
+            // search for level 2 cate
+            List<CategoryEntity> entities = getCategoryEntities(entityList, v.getCatId());
+            List<Catelog2Vo> catelog2Vos = null;
+            if (entities != null) {
+                catelog2Vos = entities.stream().map(l2 -> {
+                    Catelog2Vo catelog2Vo = new Catelog2Vo(v.getCatId().toString(), l2.getName(), l2.getCatId().toString(), null);
+                    // search for level 3 cate
+                    List<CategoryEntity> level3 = getCategoryEntities(entityList, l2.getCatId());
+                    // if data exist
+                    if (level3 != null) {
+                        List<Catalog3Vo> catalog3Vos = level3.stream().map(l3 -> new Catalog3Vo(l3.getCatId().toString(), l3.getName(), l2.getCatId().toString())).collect(Collectors.toList());
+                        catelog2Vo.setCatalog3List(catalog3Vos);
+                    }
+                    return catelog2Vo;
+                }).collect(Collectors.toList());
+            }
+            return catelog2Vos;
+        }));
+        return parent_cid;
+    }
+
+
+
     private List<CategoryEntity> getCategoryEntities(List<CategoryEntity> entityList,
         Long parent_cid) {
 
