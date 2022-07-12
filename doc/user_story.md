@@ -1,13 +1,13 @@
 # User Story
 
-- [Backend Management System](#backend-management-system)
+- [**Backend Management System (Administrator Side)**](#backend-management-system)
    - [Administrator System Management](#administrator-system-management)
    - [Member System Management](#member-system-management)
    - [Product System Management](#product-system-management)
    - [Discount System Management](#discount-system-management)
    - [Iventory System Management](#iventory-system-management)
    - [Order System Management](#order-system-management)
- - [Mall System](#mall-system)
+ - [**Mall System (User Side)**](#mall-system)
 
 ## Backend Management System
 
@@ -60,15 +60,36 @@
    Description: Administrator can manage the onsale product including combine coupons with the current prouct, check comments, goods off.etc
  
 ### Discount System Management
-14. **As an administrator, I want to
+14. **As an administrator, I want to create coupons**
+15. **As an administrator, I want to combine coupons with product**
+16. **As an administrator, I want to check the coupons distribution logs**
+17. **As an administrator, I want to set the bouns point for product**
 
 ### Iventory System Management
+18. **As an administrator, I want to check iventory balance**
+19. **As an administrator, I want to create purchasing List**
+20. **As an administrator, I want to consolidated Purchase List**
 
 ### Order System Management
+21. **As an administrator, I want to check orders**
+22. **As an administrator, I want to review refund requests**
+23. **As an administrator, I want to check the order statistics**
 
+    Description: order statistics includes drawing order quantity graph, order amount graph.etc
 
 ## Mall System
 
+24. **As a customer, I want to creat an account**
+25. **As a customer, I want to login/log out**
+26. **As a customer, I want to edit my profile**
+27. **As a customer, I want to change my password**
+28. **As a customer, I want to search product**
+29. **As a customer, I want to check product information**
+30. **As a customer, I want to add product to cart**
+31. **As a customer, I want to place an order and pay**
+32. **As a customer, I want to check my orders**
+33. **As a customer, I want to refund product**
+34. **As a customer, I want to comment product**
 
 
 
