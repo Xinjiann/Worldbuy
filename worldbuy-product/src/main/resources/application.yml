@@ -1,9 +1,10 @@
+ipAddr: 34.105.136.131
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://34.105.136.131:3306/worldbuy_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://${ipAddr}:3306/worldbuy_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: DTMKlxj199866
   jackson:
@@ -17,7 +18,7 @@ spring:
     application:
       name: worldbuy-product
   redis:
-    host: 34.105.136.131
+    host: ${ipAddr}
     port: 6379
 
 mybatis-plus:
