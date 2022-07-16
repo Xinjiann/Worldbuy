@@ -16,6 +16,9 @@ spring:
         server-addr: 34.105.136.131:8848
     application:
       name: worldbuy-product
+  redis:
+    host: 34.105.136.131
+    port: 6379
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml

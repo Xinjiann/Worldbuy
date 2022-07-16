@@ -2,21 +2,21 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.key" placeholder="attributes" clearable></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="getDataList()">查询</el-button>
+        <el-button @click="getDataList()">search</el-button>
         <el-button
           v-if="isAuth('product:brand:save')"
           type="primary"
           @click="addOrUpdateHandle()"
-        >新增</el-button>
+        >add</el-button>
         <el-button
           v-if="isAuth('product:brand:delete')"
           type="danger"
           @click="deleteHandle()"
           :disabled="dataListSelections.length <= 0"
-        >批量删除</el-button>
+        >batch delete</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -27,16 +27,16 @@
       style="width: 100%;"
     >
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-      <el-table-column prop="brandId" header-align="center" align="center" label="品牌id"></el-table-column>
-      <el-table-column prop="name" header-align="center" align="center" label="品牌名"></el-table-column>
-      <el-table-column prop="logo" header-align="center" align="center" label="品牌logo地址">
+      <el-table-column prop="brandId" header-align="center" align="center" label="brand id"></el-table-column>
+      <el-table-column prop="name" header-align="center" align="center" label="brand name"></el-table-column>
+      <el-table-column prop="logo" header-align="center" align="center" label="brand logo src">
         <template slot-scope="scope">
           <!-- 自定义表格+自定义图片 -->
           <img :src="scope.row.logo" style="width: 100px; height: 80px" />
         </template>
       </el-table-column>
-      <el-table-column prop="descript" header-align="center" align="center" label="介绍"></el-table-column>
-      <el-table-column prop="showStatus" header-align="center" align="center" label="显示状态">
+      <el-table-column prop="descript" header-align="center" align="center" label="intro"></el-table-column>
+      <el-table-column prop="showStatus" header-align="center" align="center" label="status">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.showStatus"
@@ -48,13 +48,13 @@
           ></el-switch>
         </template>
       </el-table-column>
-      <el-table-column prop="firstLetter" header-align="center" align="center" label="检索首字母"></el-table-column>
-      <el-table-column prop="sort" header-align="center" align="center" label="排序"></el-table-column>
-      <el-table-column fixed="right" header-align="center" align="center" width="250" label="操作">
+      <el-table-column prop="firstLetter" header-align="center" align="center" label="index letter"></el-table-column>
+      <el-table-column prop="sort" header-align="center" align="center" label="order"></el-table-column>
+      <el-table-column fixed="right" header-align="center" align="center" width="250" label="operation">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="updateCatelogHandle(scope.row.brandId)">关联分类</el-button>
-          <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.brandId)">修改</el-button>
-          <el-button type="text" size="small" @click="deleteHandle(scope.row.brandId)">删除</el-button>
+          <el-button type="text" size="small" @click="updateCatelogHandle(scope.row.brandId)">bind to category</el-button>
+          <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.brandId)">edit</el-button>
+          <el-button type="text" size="small" @click="deleteHandle(scope.row.brandId)">delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -74,28 +74,28 @@
       <el-popover placement="right-end" v-model="popCatelogSelectVisible">
         <category-cascader :catelogPath.sync="catelogPath"></category-cascader>
         <div style="text-align: right; margin: 0">
-          <el-button size="mini" type="text" @click="popCatelogSelectVisible = false">取消</el-button>
-          <el-button type="primary" size="mini" @click="addCatelogSelect">确定</el-button>
+          <el-button size="mini" type="text" @click="popCatelogSelectVisible = false">cancel</el-button>
+          <el-button type="primary" size="mini" @click="addCatelogSelect">confirm</el-button>
         </div>
-        <el-button slot="reference">新增关联</el-button>
+        <el-button slot="reference">add new association</el-button>
       </el-popover>
       <el-table :data="cateRelationTableData" style="width: 100%">
         <el-table-column prop="id" label="#"></el-table-column>
-        <el-table-column prop="brandName" label="品牌名"></el-table-column>
-        <el-table-column prop="catelogName" label="分类名"></el-table-column>
-        <el-table-column fixed="right" header-align="center" align="center" label="操作">
+        <el-table-column prop="brandName" label="brand name"></el-table-column>
+        <el-table-column prop="catelogName" label="catelog name"></el-table-column>
+        <el-table-column fixed="right" header-align="center" align="center" label="operation">
           <template slot-scope="scope">
             <el-button
               type="text"
               size="small"
               @click="deleteCateRelationHandle(scope.row.id,scope.row.brandId)"
-            >移除</el-button>
+            >remove</el-button>
           </template>
         </el-table-column>
       </el-table>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="cateRelationDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="cateRelationDialogVisible = false">确 定</el-button>
+        <el-button @click="cateRelationDialogVisible = false">cancel</el-button>
+        <el-button type="primary" @click="cateRelationDialogVisible = false">confirm</el-button>
       </span>
     </el-dialog>
   </div>
@@ -211,7 +211,7 @@ export default {
       }).then(({ data }) => {
         this.$message({
           type: "success",
-          message: "状态更新成功"
+          message: "status updated successful"
         });
       }).catch(() => {});;
     },

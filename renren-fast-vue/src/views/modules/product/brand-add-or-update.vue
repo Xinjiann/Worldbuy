@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="!dataForm.id ? 'add' : 'edit'"
     :close-on-click-modal="false"
     :visible.sync="visible"
   >
@@ -11,17 +11,17 @@
       @keyup.enter.native="dataFormSubmit()"
       label-width="140px"
     >
-      <el-form-item label="品牌名" prop="name">
-        <el-input v-model="dataForm.name" placeholder="品牌名"></el-input>
+      <el-form-item label="brand name" prop="name">
+        <el-input v-model="dataForm.name" placeholder="brand name"></el-input>
       </el-form-item>
-      <el-form-item label="品牌logo地址" prop="logo">
+      <el-form-item label="logo image" prop="logo">
         <!-- <el-input v-model="dataForm.logo" placeholder="品牌logo地址"></el-input> -->
         <single-upload v-model="dataForm.logo"></single-upload>
       </el-form-item>
-      <el-form-item label="介绍" prop="descript">
+      <el-form-item label="intro" prop="descript">
         <el-input v-model="dataForm.descript" placeholder="介绍"></el-input>
       </el-form-item>
-      <el-form-item label="显示状态" prop="showStatus">
+      <el-form-item label="status" prop="showStatus">
         <el-switch
           v-model="dataForm.showStatus"
           active-color="#13ce66"
@@ -30,17 +30,17 @@
           :inactive-value="0"
         ></el-switch>
       </el-form-item>
-      <el-form-item label="检索首字母" prop="firstLetter">
-        <el-input v-model="dataForm.firstLetter" placeholder="检索首字母"></el-input>
+      <el-form-item label="index letter" prop="firstLetter">
+        <el-input v-model="dataForm.firstLetter" placeholder="index letter"></el-input>
       </el-form-item>
-      <el-form-item label="排序" prop="sort">
+      <el-form-item label="order" prop="sort">
         <!-- 传入的必须是一个数字 -->
-        <el-input v-model.number="dataForm.sort" placeholder="排序"></el-input>
+        <el-input v-model.number="dataForm.sort" placeholder="order"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="visible = false">cancel</el-button>
+      <el-button type="primary" @click="dataFormSubmit()">confirm</el-button>
     </span>
   </el-dialog>
 </template>
@@ -154,7 +154,7 @@ export default {
           }).then(({ data }) => {
             if (data && data.code === 0) {
               this.$message({
-                message: "操作成功",
+                message: "success",
                 type: "success",
                 duration: 1500,
                 onClose: () => {
