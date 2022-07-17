@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 商品三级分类
  *
  * @author lixinjian
  * @email xinjian.li1@outlook.com
@@ -24,6 +23,8 @@ public interface CategoryService extends IService<CategoryEntity> {
   void removeMenuByIds(List<Long> asList);
 
   Long[] findCateLogPath(Long catelogId);
+
+  void updateCascade(CategoryEntity category);
 
   List<CategoryEntity> getLevel1Categorys();
 

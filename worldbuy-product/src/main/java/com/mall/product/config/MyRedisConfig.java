@@ -15,13 +15,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyRedisConfig {
 
-	@Value("${ipAddr}")
+	@Value("${redisIp}")
 	private String ipAddr;
 
 	@Bean(destroyMethod = "shutdown")
 	public RedissonClient redisson() {
 		Config config = new Config();
-		// 创建单例模式的配置
 		config.useSingleServer().setAddress("redis://" + ipAddr + ":6379");
 		return Redisson.create(config);
 	}

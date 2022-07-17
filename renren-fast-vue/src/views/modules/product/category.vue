@@ -101,9 +101,11 @@ export default {
         method: "get"
       })
         .then(({ data }) => {
-          this.menus = data.page;
+          this.menus = data.data;
+   
         })
         .catch(() => {});
+      
     },
     batchDelete() {
       let catIds = [];

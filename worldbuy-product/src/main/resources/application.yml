@@ -1,4 +1,5 @@
 ipAddr: 34.105.136.131
+redisIp: 127.0.0.1
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -18,8 +19,13 @@ spring:
     application:
       name: worldbuy-product
   redis:
-    host: ${ipAddr}
+    host: ${redisIp}
     port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000
+      cache-null-values: true
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
