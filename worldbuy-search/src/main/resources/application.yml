@@ -5,6 +5,8 @@ spring:
     nacos:
       discovery:
         server-addr: 34.105.136.131:8848
+  thymeleaf:
+    cache: false
 
 ipAddr: 34.105.136.131
 server:
