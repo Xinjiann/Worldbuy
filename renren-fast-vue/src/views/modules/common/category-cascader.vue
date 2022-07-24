@@ -11,7 +11,7 @@
     <el-cascader
       filterable
       clearable 
-      placeholder="试试搜索：手机"
+      placeholder="try search：phone"
       v-model="paths"
       :options="categorys"
       :props="setting"
@@ -21,7 +21,7 @@
 
 <script>
 
-import PubSub from 'pubsub-js'
+// import PubSub from 'pubsub-js'
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {},
@@ -63,8 +63,9 @@ export default {
         url: this.$http.adornUrl("/product/category/list/tree"),
         method: "get"
       }).then(({ data }) => {
-        this.categorys = data.page;
+        this.categorys = data.data;
       });
+      
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）

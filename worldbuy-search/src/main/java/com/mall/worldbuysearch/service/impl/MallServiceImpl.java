@@ -24,6 +24,7 @@ import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.nested.ParsedNested;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedLongTerms;
@@ -91,7 +92,7 @@ public class MallServiceImpl implements MallService {
 			boolQuery.must(QueryBuilders.matchQuery("skuTitle",Param.getKeyword()));
 		}
 		// 1.2 bool - filter Catalog3Id
-		if(StringUtils.isEmpty(Param.getCatalog3Id() != null)){
+		if(Param.getCatalog3Id() != null){
 			boolQuery.filter(QueryBuilders.termQuery("catalogId", Param.getCatalog3Id()));
 		}
 		// 1.2 bool - brandId [集合]
@@ -165,13 +166,13 @@ public class MallServiceImpl implements MallService {
 		TermsAggregationBuilder brand_agg = AggregationBuilders.terms("brand_agg");
 		brand_agg.field("brandId").size(50);
 		// 品牌聚合的子聚合
-		brand_agg.subAggregation(AggregationBuilders.terms("brand_name_agg").field("brandName").size(1));
-		brand_agg.subAggregation(AggregationBuilders.terms("brand_img_agg").field("brandImg").size(1));
+		brand_agg.subAggregation(AggregationBuilders.terms("brand_name_agg").field("brandName.keyword").size(1));
+		brand_agg.subAggregation(AggregationBuilders.terms("brand_img_agg").field("brandImg.keyword").size(1));
 		// 将品牌聚合加入 sourceBuilder
 		sourceBuilder.aggregation(brand_agg);
 		// TODO 2.分类聚合
 		TermsAggregationBuilder catalog_agg = AggregationBuilders.terms("catalog_agg").field("catalogId").size(20);
-		catalog_agg.subAggregation(AggregationBuilders.terms("catalog_name_agg").field("catalogName").size(1));
+		catalog_agg.subAggregation(AggregationBuilders.terms("catalog_name_agg").field("catalogName.keyword").size(1));
 		// 将分类聚合加入 sourceBuilder
 		sourceBuilder.aggregation(catalog_agg);
 		// TODO 3.属性聚合 attr_agg 构建嵌入式聚合
@@ -179,7 +180,7 @@ public class MallServiceImpl implements MallService {
 		// 3.1 聚合出当前所有的attrId
 		TermsAggregationBuilder attrIdAgg = AggregationBuilders.terms("attr_id_agg").field("attrs.attrId");
 		// 3.1.1 聚合分析出当前attrId对应的attrName
-		attrIdAgg.subAggregation(AggregationBuilders.terms("attr_name_agg").field("attrs.attrName").size(1));
+		attrIdAgg.subAggregation(AggregationBuilders.terms("attr_name_agg").field("attrs.attrName.keyword").size(1));
 		// 3.1.2 聚合分析出当前attrId对应的所有可能的属性值attrValue	这里的属性值可能会有很多 所以写50
 		attrIdAgg.subAggregation(AggregationBuilders.terms("attr_value_agg").field("attrs.attrValue").size(50));
 		// 3.2 将这个子聚合加入嵌入式聚合
@@ -225,8 +226,11 @@ public class MallServiceImpl implements MallService {
 			// 2.1 得到属性的id
 			attrVo.setAttrId(bucket.getKeyAsNumber().longValue());
 			// 2.2 得到属性的名字
-			String attr_name = ((ParsedStringTerms) bucket.getAggregations().get("attr_name_agg")).getBuckets().get(0).getKeyAsString();
-			attrVo.setAttrName(attr_name);
+			List<? extends Terms.Bucket> attr_name_agg = ((ParsedStringTerms) bucket.getAggregations().get("attr_name_agg")).getBuckets();
+			if (attr_name_agg.size()>0) {
+				String attr_name = ((ParsedStringTerms) bucket.getAggregations().get("attr_name_agg")).getBuckets().get(0).getKeyAsString();
+				attrVo.setAttrName(attr_name);
+			}
 			// 2.3 得到属性的所有值
 			List<String> attr_value = ((ParsedStringTerms) bucket.getAggregations().get("attr_value_agg")).getBuckets().stream().map(item -> item.getKeyAsString()).collect(Collectors.toList());
 			attrVo.setAttrValue(attr_value);
@@ -243,11 +247,17 @@ public class MallServiceImpl implements MallService {
 			long brnadId = bucket.getKeyAsNumber().longValue();
 			brandVo.setBrandId(brnadId);
 			// 3.2 得到品牌的名
-			String brand_name = ((ParsedStringTerms) bucket.getAggregations().get("brand_name_agg")).getBuckets().get(0).getKeyAsString();
-			brandVo.setBrandName(brand_name);
+			List<? extends Terms.Bucket> brand_name_agg = ((ParsedStringTerms) bucket.getAggregations().get("brand_name_agg")).getBuckets();
+			if (brand_name_agg.size()>0) {
+				String brand_name = ((ParsedStringTerms) bucket.getAggregations().get("brand_name_agg")).getBuckets().get(0).getKeyAsString();
+				brandVo.setBrandName(brand_name);
+			}
 			// 3.3 得到品牌的图片
-			String brand_img = ((ParsedStringTerms) (bucket.getAggregations().get("brand_img_agg"))).getBuckets().get(0).getKeyAsString();
-			brandVo.setBrandImg(brand_img);
+			List<? extends Terms.Bucket> brand_img_agg = ((ParsedStringTerms) (bucket.getAggregations().get("brand_img_agg"))).getBuckets();
+			if (brand_img_agg.size() > 0) {
+				String brand_img = ((ParsedStringTerms) (bucket.getAggregations().get("brand_img_agg"))).getBuckets().get(0).getKeyAsString();
+				brandVo.setBrandImg(brand_img);
+			}
 			brandVos.add(brandVo);
 		}
 		result.setBrands(brandVos);
@@ -261,8 +271,11 @@ public class MallServiceImpl implements MallService {
 			catalogVo.setCatalogId(Long.parseLong(bucket.getKeyAsString()));
 			// 得到分类名
 			ParsedStringTerms catalog_name_agg = bucket.getAggregations().get("catalog_name_agg");
-			String catalog_name = catalog_name_agg.getBuckets().get(0).getKeyAsString();
-			catalogVo.setCatalogName(catalog_name);
+			List<? extends Terms.Bucket> buckets = catalog_name_agg.getBuckets();
+			if (buckets.size() > 0) {
+				String catalog_name = catalog_name_agg.getBuckets().get(0).getKeyAsString();
+				catalogVo.setCatalogName(catalog_name);
+			}
 			catalogVos.add(catalogVo);
 		}
 		result.setCatalogs(catalogVos);
@@ -303,7 +316,7 @@ public class MallServiceImpl implements MallService {
 				}
 				// 拿到所有查询条件 替换查询条件
 				String replace = replaceQueryString(Param, attr, "attrs");
-				navVo.setLink("http://search.glmall.com/list.html?" + replace);
+				navVo.setLink("http://search.worldbuy.com/list.html?" + replace);
 				return navVo;
 			}).collect(Collectors.toList());
 			result.setNavs(navVos);
@@ -326,7 +339,7 @@ public class MallServiceImpl implements MallService {
 					replace = replaceQueryString(Param, brandVo.getBrandId() + "", "brandId");
 				}
 				navVo.setNavValue(buffer.toString());
-				navVo.setLink("http://search.glmall.com/list.html?" + replace);
+				navVo.setLink("http://search.worldbuy.com/list.html?" + replace);
 			}
 			navs.add(navVo);
 		}
