@@ -155,30 +155,30 @@ export default {
           }
         });
       });
-      this.$confirm("修改商品规格信息, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          this.$http({
-            url: this.$http.adornUrl(`/product/attr/update/${this.spuId}`),
-            method: "post",
-            data: this.$http.adornData(submitData, false),
-          }).then(({ data }) => {
-            this.$message({
-              type: "success",
-              message: "属性修改成功!",
-            });
-          });
-        })
-        .catch((e) => {
-          this.$message({
-            type: "info",
-            message: "已取消修改" + e,
-          });
-        });
-    },
+      this.$confirm("Modify the product specification information, do you want to continue?", "Prompt", {
+         confirmButtonText: "OK",
+         cancelButtonText: "Cancel",
+         type: "warning",
+       })
+         .then(() => {
+           this.$http({
+             url: this.$http.adornUrl(`/product/attr/update/${this.spuId}`),
+             method: "post",
+             data: this.$http.adornData(submitData, false),
+           }).then(({ data }) => {
+             this.$message({
+               type: "success",
+               message: "Properties modified successfully!",
+             });
+           });
+         })
+         .catch((e) => {
+           this.$message({
+             type: "info",
+             message: "modification cancelled" + e,
+           });
+         });
+     },
   },
   created() {},
   activated() {

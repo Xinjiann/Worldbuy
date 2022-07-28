@@ -1,28 +1,23 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="6">
-      <category @tree-node-click="treenodeclick"></category>
-    </el-col>
-    <el-col :span="18">
       <div class="mod-config">
         <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
           <el-form-item>
-            <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+            <el-input v-model="dataForm.key" placeholder="parameter name" clearable></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button @click="getDataList()">查询</el-button>
-            <el-button type="success" @click="getAllDataList()">查询全部</el-button>
+            <el-button @click="getDataList()">Query</el-button>
+            <el-button type="success" @click="getAllDataList()">Query all</el-button>
             <el-button
               v-if="isAuth('product:attr:save')"
               type="primary"
               @click="addOrUpdateHandle()"
-            >新增</el-button>
+            >Add</el-button>
             <el-button
               v-if="isAuth('product:attr:delete')"
               type="danger"
               @click="deleteHandle()"
               :disabled="dataListSelections.length <= 0"
-            >批量删除</el-button>
+            >Batch delete</el-button>
           </el-form-item>
         </el-form>
         <el-table
@@ -34,32 +29,32 @@
         >
           <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
           <el-table-column prop="attrId" header-align="center" align="center" label="id"></el-table-column>
-          <el-table-column prop="attrName" header-align="center" align="center" label="属性名"></el-table-column>
+          <el-table-column prop="attrName" header-align="center" align="center" label="property name"></el-table-column>
           <el-table-column
             v-if="attrtype == 1"
             prop="searchType"
             header-align="center"
             align="center"
-            label="可检索"
+            label="retrievable"
           >
             <template slot-scope="scope">
               <i class="el-icon-success" v-if="scope.row.searchType==1"></i>
               <i class="el-icon-error" v-else></i>
             </template>
           </el-table-column>
-          <el-table-column prop="valueType" header-align="center" align="center" label="值类型">
+          <el-table-column width="150" prop="valueType" header-align="center" align="center" label="valueType">
             <template slot-scope="scope">
-              <el-tag type="success" v-if="scope.row.valueType==0">单选</el-tag>
-              <el-tag v-else>多选</el-tag>
+              <el-tag type="success" v-if="scope.row.valueType==0">Single choice</el-tag>
+              <el-tag v-else>Multiple selection</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="icon" header-align="center" align="center" label="图标">
+          <el-table-column prop="icon" header-align="center" align="center" label="icon">
             <template slot-scope="scope">
-              <!-- 自定义表格+自定义图片 -->
+              <!-- Custom form + custom image -->
               <img :src="scope.row.logo" style="width: 60px; height: 60px" />
             </template>
           </el-table-column>
-          <el-table-column prop="valueSelect" header-align="center" align="center" label="可选值">
+          <el-table-column prop="valueSelect" header-align="center" align="center" label="optional value">
             <template slot-scope="scope">
               <el-tooltip placement="top">
                 <div slot="content">
@@ -72,26 +67,26 @@
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column prop="enable" header-align="center" align="center" label="启用">
+          <el-table-column prop="enable" header-align="center" align="center" label="enable">
             <template slot-scope="scope">
               <i class="el-icon-success" v-if="scope.row.enable==1"></i>
               <i class="el-icon-error" v-else></i>
             </template>
           </el-table-column>
-          <el-table-column prop="catelogName" header-align="center" align="center" label="所属分类"></el-table-column>
+          <el-table-column prop="catelogName" header-align="center" align="center" label="Category"></el-table-column>
           <el-table-column
             v-if="attrtype == 1"
             prop="groupName"
             header-align="center"
             align="center"
-            label="所属分组"
+            label="Belonging to the group"
           ></el-table-column>
           <el-table-column
             v-if="attrtype == 1"
             prop="showDesc"
             header-align="center"
             align="center"
-            label="快速展示"
+            label="Quick Display"
           >
             <template slot-scope="scope">
               <i class="el-icon-success" v-if="scope.row.showDesc==1"></i>
@@ -103,11 +98,11 @@
             header-align="center"
             align="center"
             width="150"
-            label="操作"
+            label="Operation"
           >
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.attrId)">修改</el-button>
-              <el-button type="text" size="small" @click="deleteHandle(scope.row.attrId)">删除</el-button>
+              <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.attrId)">Modify</el-button>
+              <el-button type="text" size="small" @click="deleteHandle(scope.row.attrId)">Delete</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -120,7 +115,7 @@
           :total="totalPage"
           layout="total, sizes, prev, pager, next, jumper"
         ></el-pagination>
-        <!-- 弹窗, 新增 / 修改 -->
+        <!-- popup, add/modify -->
         <add-or-update
           :type="attrtype"
           v-if="addOrUpdateVisible"
@@ -128,8 +123,6 @@
           @refreshDataList="getDataList"
         ></add-or-update>
       </div>
-    </el-col>
-  </el-row>
 </template>
 
 <script>
@@ -230,11 +223,11 @@ export default {
             return item.attrId;
           });
       this.$confirm(
-        `确定对[id=${ids.join(",")}]进行[${id ? "删除" : "批量删除"}]操作?`,
-        "提示",
+        `Are you sure to perform the [${id ? "delete" : "batch delete"}] operation on [id=${ids.join(",")}]?`,
+        "hint",
         {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
           type: "warning"
         }
       )
@@ -246,7 +239,7 @@ export default {
           }).then(({ data }) => {
             if (data && data.code === 0) {
               this.$message({
-                message: "操作成功",
+                message: "Operation successful",
                 type: "success",
                 duration: 1500,
                 onClose: () => {

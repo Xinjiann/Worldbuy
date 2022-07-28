@@ -12,7 +12,7 @@
       label-width="120px"
     >
       <el-form-item label="优惠卷类型" prop="couponType">
-        <el-select v-model="dataForm.couponType" placeholder="请选择">
+        <el-select v-model="dataForm.couponType" placeholder="select">
           <el-option label="全场赠券" :value="0"></el-option>
           <el-option label="会员赠券" :value="1"></el-option>
           <el-option label="购物赠券" :value="2"></el-option>

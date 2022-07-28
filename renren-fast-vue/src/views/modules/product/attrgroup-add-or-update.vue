@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="!dataForm.id ? 'Add' : 'Modify'"
     :close-on-click-modal="false"
     :visible.sync="visible"
     @closed="dialogClose"
@@ -12,25 +12,25 @@
       @keyup.enter.native="dataFormSubmit()"
       label-width="120px"
     >
-      <el-form-item label="组名" prop="attrGroupName">
-        <el-input v-model="dataForm.attrGroupName" placeholder="组名"></el-input>
+      <el-form-item label="group name" prop="attrGroupName">
+        <el-input v-model="dataForm.attrGroupName" placeholder="group name"></el-input>
       </el-form-item>
-      <el-form-item label="排序" prop="sort">
-        <el-input v-model="dataForm.sort" placeholder="排序"></el-input>
+      <el-form-item label="sort" prop="sort">
+        <el-input v-model="dataForm.sort" placeholder="sort"></el-input>
       </el-form-item>
-      <el-form-item label="描述" prop="descript">
-        <el-input v-model="dataForm.descript" placeholder="描述"></el-input>
+      <el-form-item label="description" prop="descript">
+        <el-input v-model="dataForm.descript" placeholder="description"></el-input>
       </el-form-item>
-      <el-form-item label="组图标" prop="icon">
-        <el-input v-model="dataForm.icon" placeholder="组图标"></el-input>
+      <el-form-item label="group icon" prop="icon">
+        <el-input v-model="dataForm.icon" placeholder="group icon"></el-input>
       </el-form-item>
-      <el-form-item label="所属分类" prop="catelogId">
+      <el-form-item label="Category" prop="catelogId">
         <category-cascader :catelogPath.sync="catelogPath"></category-cascader>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button @click="visible = false">Cancel</el-button>
+      <el-button type="primary" @click="dataFormSubmit()">OK</el-button>
     </span>
   </el-dialog>
 </template>
@@ -46,27 +46,27 @@ export default {
         children: "children"
       },
       visible: false,
-      categorys: [],
+      categories: [],
       catelogPath: [],
       dataForm: {
         attrGroupId: 0,
         attrGroupName: "",
         sort: "",
-        descript: "",
+        description: "",
         icon: "",
         catelogId: 0
       },
       dataRule: {
         attrGroupName: [
-          { required: true, message: "组名不能为空", trigger: "blur" }
+          { required: true, message: "Group name cannot be empty", trigger: "blur" }
         ],
-        sort: [{ required: true, message: "排序不能为空", trigger: "blur" }],
-        descript: [
-          { required: true, message: "描述不能为空", trigger: "blur" }
+        sort: [{ required: true, message: "Sort cannot be empty", trigger: "blur" }],
+        description: [
+          { required: true, message: "Description cannot be empty", trigger: "blur" }
         ],
-        icon: [{ required: true, message: "组图标不能为空", trigger: "blur" }],
+        icon: [{ required: true, message: "Group icon cannot be empty", trigger: "blur" }],
         catelogId: [
-          { required: true, message: "所属分类id不能为空", trigger: "blur" }
+          { required: true, message: "The category id cannot be empty", trigger: "blur" }
         ]
       }
     };
@@ -106,7 +106,7 @@ export default {
               this.dataForm.descript = data.attrGroup.descript;
               this.dataForm.icon = data.attrGroup.icon;
               this.dataForm.catelogId = data.attrGroup.catelogId;
-              // 查出catelogId的完整路径
+              // Find out the full path of catelogId
               this.catelogPath = data.attrGroup.catelogPath;
             }
             
@@ -114,7 +114,7 @@ export default {
         }
       });
     },
-    // 表单提交
+    // form submit
     dataFormSubmit() {
       this.$refs["dataForm"].validate(valid => {
         if (valid) {
@@ -136,7 +136,7 @@ export default {
           }).then(({ data }) => {
             if (data && data.code === 0) {
               this.$message({
-                message: "操作成功",
+                message: "Operation successful",
                 type: "success",
                 duration: 1500,
                 onClose: () => {

@@ -9,21 +9,21 @@
     >
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
       <el-table-column prop="id" header-align="center" align="center" label="id"></el-table-column>
-      <el-table-column prop="spuName" header-align="center" align="center" label="名称"></el-table-column>
-      <el-table-column prop="spuDescription" header-align="center" align="center" label="描述"></el-table-column>
-      <el-table-column prop="catalogId" header-align="center" align="center" label="分类"></el-table-column>
-      <el-table-column prop="brandId" header-align="center" align="center" label="品牌"></el-table-column>
-      <el-table-column prop="weight" header-align="center" align="center" label="重量(kg)"></el-table-column>
-      <el-table-column prop="publishStatus" header-align="center" align="center" label="上架状态">
+      <el-table-column prop="spuName" header-align="center" align="center" label="name"></el-table-column>
+      <el-table-column prop="spuDescription" header-align="center" align="center" label="description"></el-table-column>
+      <el-table-column prop="catalogId" header-align="center" align="center" label="category"></el-table-column>
+      <el-table-column prop="brandId" header-align="center" align="center" label="brand"></el-table-column>
+      <el-table-column prop="weight" header-align="center" align="center" label="Weight (kg)"></el-table-column>
+      <el-table-column prop="publishStatus" header-align="center" align="center" label="published status">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.publishStatus == 0">new</el-tag>
           <el-tag v-if="scope.row.publishStatus == 1">on sale</el-tag>
           <el-tag v-if="scope.row.publishStatus == 2">off sale</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createTime" header-align="center" align="center" label="创建时间"></el-table-column>
-      <el-table-column prop="updateTime" header-align="center" align="center" label="修改时间"></el-table-column>
-      <el-table-column fixed="right" header-align="center" align="center" width="150" label="操作">
+      <el-table-column prop="createTime" header-align="center" align="center" label="create time"></el-table-column>
+      <el-table-column prop="updateTime" header-align="center" align="center" label="modification time"></el-table-column>
+      <el-table-column fixed="right" header-align="center" align="center" width="150" label="action">
         <template slot-scope="scope">
           <el-button
             v-if="scope.row.publishStatus == 0"
@@ -81,7 +81,7 @@ export default {
       }).then(({ data }) => {
         if (data && data.code === 0) {
           this.$message({
-            message: "操作成功",
+            message: "success",
             type: "success",
             duration: 1500,
             onClose: () => {

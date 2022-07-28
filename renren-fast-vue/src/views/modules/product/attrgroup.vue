@@ -1,28 +1,23 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="6">
-      <category @tree-node-click="treenodeclick"></category>
-    </el-col>
-    <el-col :span="18">
       <div class="mod-config">
         <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
           <el-form-item>
-            <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+            <el-input v-model="dataForm.key" placeholder="parameter name" clearable></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button @click="getDataList()">查询</el-button>
-            <el-button type="success" @click="getAllDataList()">查询全部</el-button>
+            <el-button @click="getDataList()">Query</el-button>
+            <el-button type="success" @click="getAllDataList()">Query all</el-button>
             <el-button
               v-if="isAuth('product:attrgroup:save')"
               type="primary"
               @click="addOrUpdateHandle()"
-            >新增</el-button>
+            >Add</el-button>
             <el-button
               v-if="isAuth('product:attrgroup:delete')"
               type="danger"
               @click="deleteHandle()"
               :disabled="dataListSelections.length <= 0"
-            >批量删除</el-button>
+            >Batch delete</el-button>
           </el-form-item>
         </el-form>
         <el-table
@@ -33,31 +28,31 @@
           style="width: 100%;"
         >
           <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-          <el-table-column prop="attrGroupId" header-align="center" align="center" label="分组id"></el-table-column>
-          <el-table-column prop="attrGroupName" header-align="center" align="center" label="组名"></el-table-column>
-          <el-table-column prop="sort" header-align="center" align="center" label="排序"></el-table-column>
-          <el-table-column prop="descript" header-align="center" align="center" label="描述"></el-table-column>
-          <el-table-column prop="icon" header-align="center" align="center" label="组图标">
+          <el-table-column prop="attrGroupId" header-align="center" align="center" label="group id"></el-table-column>
+          <el-table-column prop="attrGroupName" header-align="center" align="center" label="group name"></el-table-column>
+          <el-table-column prop="sort" header-align="center" align="center" label="sort"></el-table-column>
+          <el-table-column prop="descript" header-align="center" align="center" label="description"></el-table-column>
+          <el-table-column prop="icon" header-align="center" align="center" label="group icon">
             <template slot-scope="scope">
               <img :src="scope.row.logo" style="width: 60px; height: 60px" />
             </template>
           </el-table-column>
-          <el-table-column prop="catelogId" header-align="center" align="center" label="分类id"></el-table-column>
+          <el-table-column prop="catelogId" header-align="center" align="center" label="category id"></el-table-column>
           <el-table-column
             fixed="right"
             header-align="center"
             align="center"
             width="150"
-            label="操作"
+            label="Operation"
           >
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="relationHandle(scope.row.attrGroupId)">关联</el-button>
+              <el-button type="text" size="small" @click="relationHandle(scope.row.attrGroupId)">Association</el-button>
               <el-button
                 type="text"
                 size="small"
                 @click="addOrUpdateHandle(scope.row.attrGroupId)"
-              >修改</el-button>
-              <el-button type="text" size="small" @click="deleteHandle(scope.row.attrGroupId)">删除</el-button>
+              >Modify</el-button>
+              <el-button type="text" size="small" @click="deleteHandle(scope.row.attrGroupId)">Delete</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -70,14 +65,12 @@
           :total="totalPage"
           layout="total, sizes, prev, pager, next, jumper"
         ></el-pagination>
-        <!-- 弹窗, 新增 / 修改 -->
+        <!-- popup, add/modify -->
         <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
 
-        <!-- 修改关联关系 -->
+        <!-- Modify the relationship -->
         <relation-update v-if="relationVisible" ref="relationUpdate" @refreshData="getDataList"></relation-update>
       </div>
-    </el-col>
-  </el-row>
 </template>
 
 <script>
@@ -188,11 +181,11 @@ export default {
             return item.attrGroupId;
           });
       this.$confirm(
-        `确定对[id=${ids.join(",")}]进行[${id ? "删除" : "批量删除"}]操作?`,
-        "提示",
+        `Are you sure to perform the [${id ? "delete" : "batch delete"}] operation on [id=${ids.join(",")}]?`,
+        "hint",
         {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
           type: "warning"
         }
       )
@@ -204,7 +197,7 @@ export default {
           }).then(({ data }) => {
             if (data && data.code === 0) {
               this.$message({
-                message: "操作成功",
+                message: "Operation successful",
                 type: "success",
                 duration: 1500,
                 onClose: () => {

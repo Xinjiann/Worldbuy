@@ -19,9 +19,9 @@
         <single-upload v-model="dataForm.logo"></single-upload>
       </el-form-item>
       <el-form-item label="intro" prop="descript">
-        <el-input v-model="dataForm.descript" placeholder="介绍"></el-input>
+        <el-input v-model="dataForm.descript" placeholder="intro"></el-input>
       </el-form-item>
-      <el-form-item label="status" prop="showStatus">
+      <el-form-item label="showing status" prop="showStatus">
         <el-switch
           v-model="dataForm.showStatus"
           active-color="#13ce66"
@@ -62,17 +62,17 @@ export default {
         sort: 0
       },
       dataRule: {
-        name: [{ required: true, message: "品牌名不能为空", trigger: "blur" }],
+        name: [{ required: true, message: "brand should not be empty", trigger: "blur" }],
         logo: [
-          { required: true, message: "品牌logo地址不能为空", trigger: "blur" }
+          { required: true, message: "logo should not be empty", trigger: "blur" }
         ],
         descript: [
-          { required: true, message: "介绍不能为空", trigger: "blur" }
+          { required: true, message: "intro should not be empty", trigger: "blur" }
         ],
         showStatus: [
           {
             required: true,
-            message: "显示状态[0-不显示；1-显示]不能为空",
+            message: "status should not be empty",
             trigger: "blur"
           }
         ],
@@ -80,9 +80,9 @@ export default {
           {
             validator: (rule, value, callback) => {
               if (value == "") {
-                callback(new Error("首字母必须填写"));
+                callback(new Error("first letter should not be empty"));
               } else if (!/^[a-zA-Z]$/.test(value)) {
-                callback(new Error("首字母必须a-z或者A-Z之间"));
+                callback(new Error("first letter must between a-z"));
               } else {
                 callback();
               }
@@ -94,9 +94,9 @@ export default {
           {
             validator: (rule, value, callback) => {
               if (value == "" && value != 0) {
-                callback(new Error("排序字段必须填写"));
+                callback(new Error("Sort field is required"));
               } else if (!Number.isInteger(value) || value<0) {
-                callback(new Error("排序必须是一个正整数"));
+                callback(new Error("sort must be a positive integer"));
               } else {
                 callback();
               }

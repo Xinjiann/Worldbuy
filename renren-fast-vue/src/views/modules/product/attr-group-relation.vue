@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-dialog :close-on-click-modal="false" :visible.sync="visible" @closed="dialogClose">
-      <el-dialog width="40%" title="选择属性" :visible.sync="innerVisible" append-to-body>
+      <el-dialog width="40%" title="Select attribute" :visible.sync="innerVisible" append-to-body>
         <div>
           <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
             <el-form-item>
-              <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+              <el-input v-model="dataForm.key" placeholder="parameter name" clearable></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button @click="getDataList()">查询</el-button>
+              <el-button @click="getDataList()">Query</el-button>
             </el-form-item>
           </el-form>
           <el-table
@@ -19,14 +19,14 @@
             style="width: 100%;"
           >
             <el-table-column type="selection" header-align="center" align="center"></el-table-column>
-            <el-table-column prop="attrId" header-align="center" align="center" label="属性id"></el-table-column>
-            <el-table-column prop="attrName" header-align="center" align="center" label="属性名"></el-table-column>
-            <el-table-column prop="icon" header-align="center" align="center" label="属性图标">
+            <el-table-column prop="attrId" header-align="center" align="center" label="property id"></el-table-column>
+            <el-table-column prop="attrName" header-align="center" align="center" label="property name"></el-table-column>
+            <el-table-column prop="icon" header-align="center" align="center" label="property icon">
               <template slot-scope="scope">
               <img :src="scope.row.logo" style="width: 60px; height: 60px" />
             </template>
             </el-table-column>
-            <el-table-column prop="valueSelect" header-align="center" align="center" label="可选值列表"></el-table-column>
+            <el-table-column prop="valueSelect" header-align="center" align="center" label="List of optional values"></el-table-column>
           </el-table>
           <el-pagination
             @size-change="sizeChangeHandle"
@@ -39,19 +39,19 @@
           ></el-pagination>
         </div>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="innerVisible = false">取 消</el-button>
-          <el-button type="primary" @click="submitAddRealtion">确认新增</el-button>
+          <el-button @click="innerVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="submitAddRealtion">Confirm Addition</el-button>
         </div>
       </el-dialog>
       <el-row>
         <el-col :span="24">
-          <el-button type="primary" @click="addRelation">新建关联</el-button>
+          <el-button type="primary" @click="addRelation">New Relation</el-button>
           <el-button
             type="danger"
             @click="batchDeleteRelation"
             :disabled="dataListSelections.length <= 0"
-          >批量删除</el-button>
-          <!--  -->
+          >Batch delete</el-button>
+          <!-- -->
           <el-table
             :data="relationAttrs"
             style="width: 100%"
@@ -60,8 +60,8 @@
           >
             <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
             <el-table-column prop="attrId" label="#"></el-table-column>
-            <el-table-column prop="attrName" label="属性名"></el-table-column>
-            <el-table-column prop="valueSelect" label="可选值">
+            <el-table-column prop="attrName" label="Attribute name"></el-table-column>
+            <el-table-column prop="valueSelect" label="optional value">
               <template slot-scope="scope">
                 <el-tooltip placement="top">
                   <div slot="content">
@@ -74,9 +74,9 @@
                 </el-tooltip>
               </template>
             </el-table-column>
-            <el-table-column fixed="right" header-align="center" align="center" label="操作">
+            <el-table-column fixed="right" header-align="center" align="center" label="action">
               <template slot-scope="scope">
-                <el-button type="text" size="small" @click="relationRemove(scope.row.attrId)">移除</el-button>
+                <el-button type="text" size="small" @click="relationRemove(scope.row.attrId)">Remove</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -87,15 +87,15 @@
 </template>
 
 <script>
-//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-//例如：import 《组件名称》 from '《组件路径》';
+//You can import other files here (such as: components, tool js, third-party plug-in js, json files, image files, etc.)
+//For example: import "component name" from '"component path"';
 
 export default {
-  //import引入的组件需要注入到对象中才能使用
+  //The components introduced by import need to be injected into the object before they can be used
   components: {},
   props: {},
   data() {
-    //这里存放数据
+    // store data here
     return {
       attrGroupId: 0,
       visible: false,
@@ -113,11 +113,11 @@ export default {
       innerdataListSelections: []
     };
   },
-  //计算属性 类似于data概念
+  //Computed properties are similar to the data concept
   computed: {},
-  //监控data中的数据变化
+  //Monitor data changes in data
   watch: {},
-  //方法集合
+  // method collection
   methods: {
     selectionChangeHandle(val) {
       this.dataListSelections = val;
@@ -140,14 +140,14 @@ export default {
         data: this.$http.adornData(postData, false)
       }).then(({ data }) => {
         if (data.code == 0) {
-          this.$message({ type: "success", message: "删除成功" });
+          this.$message({ type: "success", message: "Delete successful" });
           this.init(this.attrGroupId);
         } else {
           this.$message({ type: "error", message: data.msg });
         }
       }).catch(() => {});
     },
-    //移除关联
+    // remove association
     relationRemove(attrId) {
       let data = [];
       data.push({ attrId, attrGroupId: this.attrGroupId });
@@ -157,7 +157,7 @@ export default {
         data: this.$http.adornData(data, false)
       }).then(({ data }) => {
         if (data.code == 0) {
-          this.$message({ type: "success", message: "删除成功" });
+          this.$message({ type: "success", message: "Delete successful" });
           this.init(this.attrGroupId);
         } else {
           this.$message({ type: "error", message: data.msg });
@@ -166,8 +166,8 @@ export default {
     },
     submitAddRealtion() {
       this.innerVisible = false;
-      //准备数据
-      // console.log("准备新增的数据", this.innerdataListSelections);
+      // prepare data
+      // console.log("Prepare new data", this.innerdataListSelections);
       if (this.innerdataListSelections.length > 0) {
         let postData = [];
         this.innerdataListSelections.forEach(item => {
@@ -179,7 +179,7 @@ export default {
           data: this.$http.adornData(postData, false)
         }).then(({ data }) => {
           if (data.code == 0) {
-            this.$message({ type: "success", message: "新增关联成功" });
+            this.$message({ type: "success", message: "Added association successfully" });
           }
           this.$emit("refreshData");
           this.init(this.attrGroupId);
@@ -203,7 +203,7 @@ export default {
     dialogClose() {},
 
     //========
-    // 获取数据列表
+    // get data list
     getDataList() {
       this.dataListLoading = true;
       this.$http({
@@ -227,13 +227,13 @@ export default {
         this.dataListLoading = false;
       }).catch(() => {});
     },
-    // 每页数
+    // per page
     sizeChangeHandle(val) {
       this.pageSize = val;
       this.pageIndex = 1;
       this.getDataList();
     },
-    // 当前页
+    // current page
     currentChangeHandle(val) {
       this.pageIndex = val;
       this.getDataList();
@@ -241,5 +241,5 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped>
 </style>
