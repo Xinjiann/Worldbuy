@@ -38,3 +38,8 @@ mybatis-plus:
       logic-not-delete-value: 0
 server:
   port: 10000
+worldbuy:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10

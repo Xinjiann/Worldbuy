@@ -16,34 +16,34 @@ import java.util.List;
 public class SkuItemVo {
 
 	/**
-	 * 基本信息
+	 * Basic Information
 	 */
 	SkuInfoEntity info;
 
 	boolean hasStock = true;
 
 	/**
-	 * 图片信息
+	 * image information
 	 */
 	List<SkuImagesEntity> images;
 
 	/**
-	 * 销售属性组合
+	 * Sales attribute combination
 	 */
 	List<ItemSaleAttrVo> saleAttr;
 
 	/**
-	 * 介绍
+	 * introduce
 	 */
 	SpuInfoDescEntity desc;
 
 	/**
-	 * 参数规格信息
+	 * Parameter specification information
 	 */
 	List<SpuItemAttrGroup> groupAttrs;
 
 	/**
-	 * 秒杀信息
+	 *Seckill information
 	 */
 	SeckillInfoVo seckillInfoVo;
 }
