@@ -21,7 +21,7 @@ public class ThirdPartyMsg {
     private String appcode;
 
     public String SendCode(String phone_number, String code) {
-        phone_number = "+"+phone_number;
+        phone_number = "+86"+phone_number;
         String host = "https://intlsms.market.alicloudapi.com";
         String path = "/comms/sms/sendmsgall";
         String method = "POST";

@@ -6,7 +6,6 @@ import com.mall.auth.feign.ThirdPartFeignService;
 import com.mall.auth.vo.UserLoginVo;
 import com.mall.auth.vo.UserRegisterVo;
 import com.mall.common.constant.AuthServerConstant;
-import com.mall.common.exception.BizCodeEnum;
 import com.mall.common.utils.R;
 import com.mall.common.vo.MemberRsepVo;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +54,11 @@ public class LoginController {
 			return "login";
 		}
 		return "redirect:http://worldbuy.com";
+	}
+
+	@GetMapping({"/reg.html"})
+	public String regPage(){
+		return "reg";
 	}
 
 	@PostMapping("/login")
