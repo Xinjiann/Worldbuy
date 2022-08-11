@@ -1,7 +1,9 @@
 package com.mall.thirdparty.component;
 
+import com.mall.common.utils.HttpUtils;
 import lombok.Data;
 import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +21,7 @@ public class ThirdPartyMsg {
     private String appcode;
 
     public String SendCode(String phone_number, String code) {
-
+        phone_number = "+"+phone_number;
         String host = "https://intlsms.market.alicloudapi.com";
         String path = "/comms/sms/sendmsgall";
         String method = "POST";
@@ -34,27 +36,23 @@ public class ThirdPartyMsg {
         bodys.put("callbackUrl", "http://test.dev.esandcloud.com");
         bodys.put("channel", "0");
         bodys.put("mobile", phone_number);
-        bodys.put("templateID", "20220809010255");
+        bodys.put("templateID", "0000000");
         bodys.put("templateParamSet", code+", 1");
+        HttpResponse response = null;
 
 
         try {
-            /**
-             * 重要提示如下:
-             * HttpUtils请从
-             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
-             * 下载
-             *
-             * 相应的依赖请参照
-             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
-             */
-            HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
-            return response.toString();
+            response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
+            System.out.println(response.toString());
+            if(response.getStatusLine().getStatusCode() == 200){
+                return EntityUtils.toString(response.getEntity());
+            }
 //            System.out.println(response.toString());
             //获取response的body
             //System.out.println(EntityUtils.toString(response.getEntity()));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "fail_" + response.getStatusLine().getStatusCode();
     }
 }

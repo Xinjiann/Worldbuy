@@ -1,7 +1,7 @@
 ipAddr: 127.0.0.1
 spring:
   application:
-    name: mall-auth-server
+    name: worldbuy-auth-server
   cloud:
     nacos:
       discovery:
@@ -15,6 +15,7 @@ spring:
 #    store-type: redis
   redis:
     host: ${ipAddr}
+    port: 6379
 server:
   port: 20000
   # session存活时间

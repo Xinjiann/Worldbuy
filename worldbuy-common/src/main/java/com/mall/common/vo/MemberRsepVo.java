@@ -1,28 +1,19 @@
-package com.mall.member.entity;
+package com.mall.common.vo;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
- * 会员
- * 
- * @author lixinjian
- * @email xinjian.li1@outlook.com
- * @date 2022-02-08 01:58:16
+ * <p>Title: MemberRsepVo</p>
+ * Description：
+ * date：2022/8/12 17:17
  */
+@ToString
 @Data
-@TableName("ums_member")
-public class MemberEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * id
-	 */
-	@TableId
+public class MemberRsepVo implements Serializable {
 	private Long id;
 	/**
 	 * 会员等级id
