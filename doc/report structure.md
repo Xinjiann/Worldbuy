@@ -1,0 +1,32 @@
+- Introduction
+  -  Aims & Objectives
+- Analysis & Requirements 
+  - Existing Tools and Techniques
+  - Distributed Architecture
+  - Cloud Service Architecture
+  - Existing Applications
+  - Proposed Features 
+  - Functional Requirements
+  - Non-functional Requirements
+  - Discussion 
+- Design
+  - Mall Service Logic Design (login, searching, product details, shopping cart, ordering services)
+  - Manage Service Logic Design (commodity system, coupon system, inventory system, order system, user system, content system services)
+  - Database Design
+  - Interface Design 
+- Implementation
+  - System Architecture 
+  - Class Structure 
+  - Operation Implementation 
+  - Technical Details (high concurrency thread safety problems, distributed transaction problem, interface idempotency problem, SSO, flow control, fuse degradation)
+- Testing & Evaluation
+  - Stress Testing 
+  - Unit Testing 
+- Evaluation 
+  - User Evaluation 
+  - Analysis 
+- Conclusion
+  - Project Achievements 
+  - Project Limitations 
+  - Developer’s Retrospective 
+  - Future Work 
