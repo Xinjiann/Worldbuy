@@ -1,5 +1,5 @@
 - Introduction
-  -  Aims & Objectives
+  -  Background & Objectives
 - Analysis & Requirements 
   - Existing Tools and Techniques
   - Distributed Architecture
