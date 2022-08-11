@@ -5,10 +5,8 @@
   - Distributed Architecture
   - Cloud Service Architecture
   - Existing Applications
-  - Proposed Features 
   - Functional Requirements
-  - Non-functional Requirements
-  - Discussion 
+  - Non-functional Requirements 
 - Design
   - Mall Service Logic Design (login, searching, product details, shopping cart, ordering services)
   - Manage Service Logic Design (commodity system, coupon system, inventory system, order system, user system, content system services)
