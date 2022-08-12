@@ -9,6 +9,8 @@ spring:
     cache: false
     suffix: .html
     prefix: classpath:/templates/
+  session:
+    store-type: redis
 
 ipAddr: 34.105.136.131
 server:

@@ -11,8 +11,8 @@ spring:
 #        dashboard: localhost:8333
   thymeleaf:
     cache: false
-#  session:
-#    store-type: redis
+  session:
+    store-type: redis
   redis:
     host: ${ipAddr}
     port: 6379

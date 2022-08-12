@@ -1,4 +1,4 @@
-package com.mall.worldbuysearch.config;
+package com.mall.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.session.web.http.DefaultCookieSerializer;
 
 /**
  * <p>Title: GlMallSessionConfig</p>
- * Description：session
+ * Description：设置Session作用域、自定义cookie序列化机制
  * date：2022/8/13 21:44
  */
 @Configuration
