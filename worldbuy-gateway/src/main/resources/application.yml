@@ -47,6 +47,10 @@ spring:
           uri: lb://worldbuy-auth-server
           predicates:
             - Host=auth.worldbuy.com
+        - id: cart_route
+          uri: lb://worldbuy-cart
+          predicates:
+            - Host=cart.worldbuy.com
         - id: mall_route
           uri: lb://worldbuy-product
           predicates:
