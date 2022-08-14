@@ -1,28 +1,52 @@
+server:
+  port: 11000
 spring:
+  application:
+    name: worldbuy-ware
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://34.105.136.131:3306/worldbuy_wms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      username: root
-      password: DTMKlxj199866
+    username: root
+    password: DTMKlxj99866
+    url: jdbc:mysql://34.105.136.131:3306/worldbuy_wms?serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: 34.105.136.131:8848
-
-    application:
-      name: worldbuy-ware
-
-#    username: root
-#    data-password: DTMKlxj199866
-#    url: jdbc:mysql://35.197.253.168:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
-##    url: jdbc:mysql://35.197.253.168:3306/gulimall_pms
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    sentinel:
+#      transport:
+#        dashboard: localhost:8333
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  rabbitmq:
+    host: 34.105.136.131
+    virtual-host: /
+    listener:
+      simple:
+        # 手动确认接受消息
+        acknowledge-mode: manual
+#  zipkin:
+#    base-url: 10.43.1.52:9411/
+#    # 关闭我们自动的服务发现功能
+#    discovery-client-enabled: false
+#    sender:
+#      type: web
+#  sleuth:
+#    sampler:
+#      probability: 1
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
-server:
-  port: 11000
+logging:
+  level:
+    com.firenay.mall.ware: debug
+myRabbitmq:
+  MQConfig:
+    queues: stock.release.stock.queue
+    delayQueue: stock.delay.queue
+    eventExchange: stock-event-exchange
+    routingKey: stock.locked
+    letterRoutingKey: stock.release
+    # 库存自动过期时间 单位:(毫秒)
+    ttl: 900000

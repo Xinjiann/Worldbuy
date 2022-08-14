@@ -1,20 +1,17 @@
-server:
-  port: 9000
 spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://34.105.136.131:3306/worldbuy_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: DTMKlxj199866
   cloud:
     nacos:
       discovery:
         server-addr: 34.105.136.131:8848
-#    sentinel:
-#      transport:
-#        dashboard: localhost:8333
   application:
     name: worldbuy-order
-  datasource:
-    username: root
-    password: DTMKlxj199866
-    url: jdbc:mysql://34.105.136.131:3306/worldbuy_oms
-    driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -41,22 +38,9 @@ spring:
     listener:
       simple:
         acknowledge-mode: manual
-  mvc:
-    date-format: yyyy-MM-dd HH:mm:ss
-#  zipkin:
-#    base-url: 34.105.136.131:9411/
-#    # 关闭我们自动的服务发现功能
-#    discovery-client-enabled: false
-#    sender:
-#      type: web
-#  sleuth:
-#    sampler:
-#      probability: 1
-mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
-  global-config:
-    db-config:
-      id-type: auto
+    mvc:
+      date-format: yyyy-MM-dd HH:mm:ss
+
 myRabbitmq:
   queue: mall-queue
   exchange: mall-exchange
@@ -73,6 +57,12 @@ myRabbitmq:
     # 库存解锁队列
     ReleaseOther: stock.release.stock.queue
     ReleaseOtherKey: order.release.other
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
 worldbuy:
   thread:
     core-size: 20
@@ -82,5 +72,7 @@ alipay:
   app_id: 2016102100732649
   # 支付宝异步回调通知 这个来感应订单是否完成
   notify_url: http://sthwsr.natappfree.cc/payed/notify
-  return_url: http://member.glmall.com/memberOrder.html
+  return_url: http://member.worldbuy.com/memberOrder.html
   timeout: 15m
+server:
+  port: 41000
