@@ -1,17 +1,17 @@
 server:
-  port: 11000
+  port: 11001
 spring:
-  application:
-    name: worldbuy-ware
   datasource:
     username: root
-    password: DTMKlxj99866
-    url: jdbc:mysql://34.105.136.131:3306/worldbuy_wms?serverTimezone=Asia/Shanghai
+    password: DTMKlxj199866
+    url: jdbc:mysql://34.105.136.131:3306/worldbuy_wms
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: 34.105.136.131:8848
+  application:
+    name: worldbuy-ware
 #    sentinel:
 #      transport:
 #        dashboard: localhost:8333
@@ -19,7 +19,11 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   rabbitmq:
     host: 34.105.136.131
+#    port: 5672
+    # 指定虚拟主机
     virtual-host: /
+#    username: guest
+#    password: guest
     listener:
       simple:
         # 手动确认接受消息
@@ -38,9 +42,9 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
-logging:
-  level:
-    com.firenay.mall.ware: debug
+#logging:
+#  level:
+#    com.mall.ware: debug
 myRabbitmq:
   MQConfig:
     queues: stock.release.stock.queue

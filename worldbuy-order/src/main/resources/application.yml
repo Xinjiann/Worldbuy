@@ -1,15 +1,9 @@
 server:
-  port: 9000
+  port: 15001
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 34.105.136.131:8848
 #    sentinel:
 #      transport:
 #        dashboard: localhost:8333
-  application:
-    name: worldbuy-order
   datasource:
     username: root
     password: DTMKlxj199866
@@ -19,6 +13,12 @@ spring:
     cache: false
     prefix: classpath:/templates/
     suffix: .html
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 34.105.136.131:8848
+  application:
+    name: worldbuy-order
   session:
     store-type: redis
   redis:
@@ -79,8 +79,8 @@ worldbuy:
     max-size: 200
     keep-alive-time: 10
 alipay:
-  app_id: 2016102100732649
+  app_id: 2021000121646820
   # 支付宝异步回调通知 这个来感应订单是否完成
-  notify_url: http://sthwsr.natappfree.cc/payed/notify
-  return_url: http://member.glmall.com/memberOrder.html
+  notify_url: https://607a-5-151-139-59.eu.ngrok.io/payed/notify
+  return_url: http://member.worldbuy.com/memberOrder.html
   timeout: 15m

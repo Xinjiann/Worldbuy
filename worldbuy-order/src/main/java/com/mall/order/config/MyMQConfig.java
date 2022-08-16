@@ -41,7 +41,7 @@ public class MyMQConfig {
 	private String ReleaseOtherKey;
 
 	@Value("${myRabbitmq.MQConfig.ttl}")
-	private String ttl;
+	private Integer ttl;
 
 	/**
 	 * String name, boolean durable, boolean exclusive, boolean autoDelete,  @Nullable Map<String, Object> arguments

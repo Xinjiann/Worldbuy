@@ -12,6 +12,16 @@ spring:
         server-addr: 34.105.136.131:8848
     application:
       name: worldbuy-member
+  thymeleaf:
+    cache: false
+  session:
+    store-type: redis
+  redis:
+    host: 127.0.0.1
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml

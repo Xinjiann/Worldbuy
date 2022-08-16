@@ -9,11 +9,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableFeignClients
+@EnableRabbit
 @MapperScan("com.mall.ware.dao")
+@EnableTransactionManagement
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableRabbit
-@EnableTransactionManagement
 public class MallWareApplication {
 
   public static void main(String[] args) {
