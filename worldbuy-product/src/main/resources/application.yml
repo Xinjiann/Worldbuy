@@ -1,6 +1,12 @@
 ipAddr: 34.105.136.131
 redisIp: 127.0.0.1
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 34.105.136.131:8848
+  application:
+    name: worldbuy-product
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -14,12 +20,6 @@ spring:
     cache: false
     suffix: .html
     prefix: classpath:/templates/
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 34.105.136.131:8848
-    application:
-      name: worldbuy-product
   redis:
     host: ${redisIp}
     port: 6379

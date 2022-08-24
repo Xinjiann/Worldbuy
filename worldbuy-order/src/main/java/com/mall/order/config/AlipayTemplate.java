@@ -23,9 +23,9 @@ public class AlipayTemplate {
     private  String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm2WrMJEGurK23iLityTaPjsbCCUH91/CSgomsrEchfRq+thl9fdFSka4Lz5pehvbCe0Od87ZsGJuyNoIf82vIUTUHkOtpgaeSHSKPiMGcYhjW3wIMBBwvYGUp4ej6kaSFfC0f7aDIy/Q7yZ7EwHzUTRZLt2fE0nUBDzvGsSURbPjNaHR1pgnZoUlqzvmxwASFRF4TPhKeTqNkRY8l48AQwBEkiEYE8HkSY4pX7N//L6owUW7M+AQqlgcV/kmhvZAeJ+9FdJHJt2eyb2lgS+EgSAgSX9lzuykuSliAoJauoXVRAdCddvi0vRMcGNzWJo8pJtJ4eKuozB1oJ+i3stY7wIDAQAB";
     // 服务器[异步通知]页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
     // 支付宝会悄悄的给我们发送一个请求，告诉我们支付成功的信息
-    private  String notify_url = "https://607a-5-151-139-59.eu.ngrok.io/payed/notify";
+    private  String notify_url = "https://0950-109-175-167-117.eu.ngrok.io/payed/notify";
 //    private  String notify_url = "http://member.worldbuy.com/memberOrder.html";
-
+    
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
     //同步通知，支付成功，一般跳转到成功页
     private  String return_url = "http://member.worldbuy.com/memberOrder.html";

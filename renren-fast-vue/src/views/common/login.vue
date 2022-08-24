@@ -3,8 +3,8 @@
     <div class="site-content__wrapper">
       <div class="site-content">
         <div class="brand-info">
-          <h2 class="brand-info__text">renren-fast-vue</h2>
-          <p class="brand-info__intro">renren-fast-vue builds and develops based on vue and element-ui, realizes the front-end function of renren-fast background management, and provides a better front-end solution.</p>
+          <h2 class="brand-info__text">Worldbuy</h2>
+          <p class="brand-info__intro"> Worldbuy Management System</p>
         </div>
         <div class="login-main">
           <h3 class="login-title">admin login</h3>
